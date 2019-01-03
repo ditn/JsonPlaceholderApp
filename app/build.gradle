@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion Versions.compileSdk
+    defaultConfig {
+        applicationId Versions.applicationId
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionCode Versions.releaseCode
+        versionName Versions.releaseName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(":api")
+    implementation project(":network")
+
+    implementation Libraries.kotlin
+    implementation Libraries.appCompat
+    implementation Libraries.constraintLayout
+    implementation Libraries.ktxCore
+    implementation Libraries.ktxFragments
+    implementation Libraries.ktxViewModel
+    implementation Libraries.rxBindingV4
+    implementation Libraries.rxAndroid
+    implementation Libraries.rxKotlin
+    implementation Libraries.koin
+    // Logging
+    implementation Libraries.timber
+
+    testImplementation Libraries.kotlinJunit
+    testImplementation Libraries.kluent
+    testImplementation Libraries.mockitoKotlin
+}

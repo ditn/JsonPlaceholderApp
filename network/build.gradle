@@ -1,0 +1,31 @@
+apply plugin: 'kotlin'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath Libraries.kotlinGradlePlugin
+    }
+}
+
+sourceCompatibility = Versions.javaCompatibilityVersion
+targetCompatibility = Versions.javaCompatibilityVersion
+
+dependencies {
+    implementation Libraries.kotlin
+    implementation Libraries.okHttp
+    // Retrofit + converters/adapters
+    implementation Libraries.retrofit
+    implementation Libraries.retrofitRxJavaAdapter
+    implementation Libraries.retrofitRxMoshiConverter
+    implementation Libraries.moshiKotlin
+    // Service Location
+    implementation Libraries.koin
+    // Testing
+    testImplementation Libraries.json
+    testImplementation Libraries.mockitoKotlin
+    testImplementation Libraries.kotlinJunit
+    testImplementation Libraries.kluent
+    testImplementation Libraries.okHttpMock
+}

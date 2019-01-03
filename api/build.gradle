@@ -1,0 +1,35 @@
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath Libraries.kotlinGradlePlugin
+    }
+}
+
+sourceCompatibility = Versions.javaCompatibilityVersion
+targetCompatibility = Versions.javaCompatibilityVersion
+
+dependencies {
+    implementation Libraries.moshiKotlin
+    implementation Libraries.kotlin
+    implementation Libraries.rxKotlin
+    // Retrofit
+    implementation Libraries.retrofit
+    // Service Location
+    implementation Libraries.koin
+    // Logging
+    implementation Libraries.timber
+    // Code gen
+    kapt Libraries.moshiKotlinCodeGen
+
+    // Testing
+    testImplementation Libraries.json
+    testImplementation Libraries.mockitoKotlin
+    testImplementation Libraries.kotlinJunit
+    testImplementation Libraries.kluent
+    testImplementation Libraries.okHttpMock
+}
