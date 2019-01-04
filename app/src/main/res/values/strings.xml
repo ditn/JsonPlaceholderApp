@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JsonPlaceholderApp</string>
+
+    <!-- Details -->
+    <string name="detail_username">Username: %1$s</string>
+    <string name="detail_comments">Comments: %1$d</string>
 </resources>

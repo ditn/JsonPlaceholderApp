@@ -60,7 +60,9 @@ class PlaceholderServiceTest : KoinTest {
                 this[0].id `should equal to` 1
                 this[1].name `should equal to` "quo vero reiciendis velit similique earum"
                 this[2].email `should equal to` "Nikita@garfield.biz"
-                this[3].body `should equal to` "non et atque\noccaecati deserunt quas accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur itaque dolor\net qui rerum deleniti ut occaecati"
+                this[3].body `should equal to` "non et atque\noccaecati deserunt quas " +
+                    "accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur " +
+                    "itaque dolor\net qui rerum deleniti ut occaecati"
             }
 
         server.takeRequest().path `should equal to` "/$PATH_COMMENTS"
@@ -81,8 +83,8 @@ class PlaceholderServiceTest : KoinTest {
             .values()
             .first()
             .apply {
-                val (name, id) = this[0]
-                name `should equal to` "Leanne Graham"
+                val (userName, id) = this[0]
+                userName `should equal to` "Bret"
                 id `should equal to` 1
             }
 
@@ -106,8 +108,12 @@ class PlaceholderServiceTest : KoinTest {
             .apply {
                 this[0].userId `should equal to` 1
                 this[1].id `should equal to` 2
-                this[2].title `should equal to` "ea molestias quasi exercitationem repellat qui ipsa sit aut"
-                this[3].body `should equal to` "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit"
+                this[2].title `should equal to` "ea molestias quasi exercitationem" +
+                    " repellat qui ipsa sit aut"
+                this[3].body `should equal to` "ullam et saepe reiciendis voluptatem " +
+                    "adipisci\nsit amet autem assumenda provident rerum culpa\nquis " +
+                    "hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt " +
+                    "voluptatem rerum illo velit"
             }
 
         server.takeRequest().path `should equal to` "/$PATH_POSTS"

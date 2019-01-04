@@ -11,9 +11,15 @@ fun before(beforeBlock: () -> Unit) = Before(beforeBlock)
 infix fun Before.after(afterBlock: () -> Unit): TestRule =
     TryFinallyTestRule(this.beforeBlock, afterBlock)
 
-private class TryFinallyTestRule(private val setupBlock: () -> Any, private val teardownBlock: () -> Unit) : TestRule {
+private class TryFinallyTestRule(
+    private val setupBlock: () -> Any,
+    private val teardownBlock: () -> Unit
+) : TestRule {
 
-    override fun apply(base: Statement, description: Description): Statement = object : Statement() {
+    override fun apply(
+        base: Statement,
+        description: Description
+    ): Statement = object : Statement() {
         override fun evaluate() {
             try {
                 setupBlock()

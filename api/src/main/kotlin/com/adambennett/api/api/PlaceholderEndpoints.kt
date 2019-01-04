@@ -13,11 +13,11 @@ internal const val PATH_USERS = "users"
 internal interface PlaceholderEndpoints {
 
     @GET(PATH_COMMENTS)
-    fun getComments() : Single<List<CommentsJson>>
+    fun getComments(): Single<List<CommentsJson>>
 
     @GET(PATH_POSTS)
-    fun getPosts() : Single<List<PostsJson>>
+    fun getPosts(): Single<List<PostsJson>>
 
     @GET(PATH_USERS)
-    fun getUsers() : Single<List<UsersJson>>
+    fun getUsers(): Single<List<UsersJson>>
 }
