@@ -19,6 +19,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        // Always show the result of every unit test, even if it passes.
+        unitTests.all {
+            testLogging {
+                events 'skipped', 'failed', 'standardOut', 'standardError'
+                maxHeapSize = "1g"
+            }
+        }
+    }
 }
 
 androidExtensions {

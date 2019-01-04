@@ -13,6 +13,12 @@ buildscript {
 sourceCompatibility = Versions.javaCompatibilityVersion
 targetCompatibility = Versions.javaCompatibilityVersion
 
+test {
+    testLogging {
+        events 'skipped', 'failed', 'standardOut', 'standardError'
+    }
+}
+
 dependencies {
     implementation Libraries.kotlin
     implementation Libraries.okHttp
