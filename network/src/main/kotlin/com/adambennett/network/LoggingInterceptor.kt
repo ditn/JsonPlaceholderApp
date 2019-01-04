@@ -9,7 +9,7 @@ import okio.Buffer
 import java.io.IOException
 import java.util.Locale
 
-internal class LoggingInterceptor(private val logger: Logger) : Interceptor {
+class LoggingInterceptor(private val logger: Logger) : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {

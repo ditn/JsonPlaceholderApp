@@ -6,9 +6,9 @@ import com.adambennett.api.api.models.UsersJson
 import io.reactivex.Single
 import retrofit2.http.GET
 
-private const val PATH_COMMENTS = "comments"
-private const val PATH_POSTS = "posts"
-private const val PATH_USERS = "users"
+internal const val PATH_COMMENTS = "comments"
+internal const val PATH_POSTS = "posts"
+internal const val PATH_USERS = "users"
 
 internal interface PlaceholderEndpoints {
 

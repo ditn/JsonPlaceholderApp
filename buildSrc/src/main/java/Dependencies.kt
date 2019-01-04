@@ -141,6 +141,7 @@ object Libraries {
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerKapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     const val koin = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    const val koinTest = "org.koin:koin-test:${Versions.koin}"
 
     // Utils
     const val commonsCodec = "commons-codec:commons-codec:${Versions.commonsCodec}"

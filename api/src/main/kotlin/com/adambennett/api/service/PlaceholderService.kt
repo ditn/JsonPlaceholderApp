@@ -10,10 +10,20 @@ class PlaceholderService internal constructor(
     private val placeholderEndpoints: PlaceholderEndpoints
 ) {
 
-    // Mapping could be done here with injected Mapper classes if we were going full Clean Code
+    // Mapping could be done here with injected Mapper classes if I were going full Clean Code
 
     fun getComments(): Single<List<Comment>> = placeholderEndpoints.getComments()
-        .map { list -> list.map { Comment(id = it.id) } }
+        .map { list ->
+            list.map {
+                Comment(
+                    id = it.id,
+                    postId = it.postId,
+                    email = it.email,
+                    name = it.name,
+                    body = it.body
+                )
+            }
+        }
 
     fun getUsers(): Single<List<User>> = placeholderEndpoints.getUsers()
         .map { list ->
@@ -31,7 +41,8 @@ class PlaceholderService internal constructor(
                 Post(
                     title = it.title,
                     body = it.body,
-                    userId = it.userId
+                    userId = it.userId,
+                    id = it.id
                 )
             }
         }
