@@ -3,6 +3,12 @@ package com.adambennett.jsonplaceholderapp.ui.list
 import com.adambennett.api.service.models.Comment
 import com.adambennett.api.service.models.Post
 import com.adambennett.api.service.models.User
+import com.adambennett.jsonplaceholderapp.ui.mvi.Action
+import com.adambennett.jsonplaceholderapp.ui.mvi.LoadPostsAction
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultData
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultError
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultLoading
+import com.adambennett.jsonplaceholderapp.ui.mvi.UnregistedAction
 import com.adambennett.testutils.rxjava.just
 import com.adambennett.testutils.rxjava.rxInit
 import com.nhaarman.mockito_kotlin.mock
@@ -96,7 +102,7 @@ class PostsListProcessorTest {
                             listOf(
                                 User(
                                     userName = "username",
-                                    userId = 7
+                                    id = 7
                                 )
                             )
                         )

@@ -1,4 +1,4 @@
-package com.adambennett.jsonplaceholderapp
+package com.adambennett.jsonplaceholderapp.utils
 
 import org.amshove.kluent.`should contain`
 import org.junit.Test

@@ -1,9 +1,15 @@
 package com.adambennett.jsonplaceholderapp.ui.list
 
 import com.adambennett.jsonplaceholderapp.testutils.rxInitAndroid
+import com.adambennett.jsonplaceholderapp.ui.mvi.Data
+import com.adambennett.jsonplaceholderapp.ui.mvi.Error
+import com.adambennett.jsonplaceholderapp.ui.mvi.Loading
+import com.adambennett.jsonplaceholderapp.ui.mvi.RefreshIntent
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultData
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultError
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultLoading
 import com.adambennett.testutils.rxjava.just
 import com.nhaarman.mockito_kotlin.mock
-import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import org.amshove.kluent.`it returns`
 import org.amshove.kluent.`should be instance of`
@@ -17,15 +23,13 @@ class ListModelTest {
 
     @Test
     fun `accepts loading event, returns data, mapped to ViewState`() {
-        ListModel(mock {
-            on { actionProcessor } `it returns` ObservableTransformer {
-                Observable.just(
-                    ResultData(
-                        listOf(ListDisplayModel("", "", 1, ""))
-                    )
-                )
+        ListModel(
+            mock {
+                on { actionProcessor } `it returns` ObservableTransformer {
+                    ResultData(listOf(ListDisplayModel("", "", 1, ""))).just()
+                }
             }
-        }).apply {
+        ).apply {
             processIntents(RefreshIntent.just())
             states()
                 .test()
@@ -38,11 +42,13 @@ class ListModelTest {
 
     @Test
     fun `accepts loading event, returns loading, mapped to ViewState`() {
-        ListModel(mock {
-            on { actionProcessor } `it returns` ObservableTransformer {
-                Observable.just(ResultLoading)
+        ListModel(
+            mock {
+                on { actionProcessor } `it returns` ObservableTransformer {
+                    ResultLoading.just()
+                }
             }
-        }).apply {
+        ).apply {
             processIntents(RefreshIntent.just())
             states()
                 .test()
@@ -55,11 +61,13 @@ class ListModelTest {
 
     @Test
     fun `accepts loading event, returns error, mapped to ViewState`() {
-        ListModel(mock {
-            on { actionProcessor } `it returns` ObservableTransformer {
-                Observable.just(ResultError(""))
+        ListModel(
+            mock {
+                on { actionProcessor } `it returns` ObservableTransformer {
+                    ResultError("").just()
+                }
             }
-        }).apply {
+        ).apply {
             processIntents(RefreshIntent.just())
             states()
                 .test()
