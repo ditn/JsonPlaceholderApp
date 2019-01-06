@@ -4,9 +4,9 @@ import com.adambennett.api.api.PATH_COMMENTS
 import com.adambennett.api.api.PATH_POSTS
 import com.adambennett.api.api.PATH_USERS
 import com.adambennett.api.koin.apiModule
-import com.adambennett.api.service.testutils.getStringFromResource
 import com.adambennett.api.service.testutils.mockNetworkModule
-import com.adambennett.api.service.testutils.testrules.mockWebServerInit
+import com.adambennett.api.service.testutils.mockWebServerInit
+import com.adambennett.testutils.getStringFromResource
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.amshove.kluent.`should equal to`

@@ -22,6 +22,7 @@ object RefreshIntent : UserIntent()
 sealed class Action
 
 object LoadPostsAction : Action()
+object UnregistedAction : Action()
 
 /**
  * These classes represent results from the processor - generally errors or data

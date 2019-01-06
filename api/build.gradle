@@ -43,10 +43,10 @@ dependencies {
     testImplementation Libraries.okHttpMock
     testImplementation Libraries.koinTest
 
-    // TODO: These would probably go in a :testutil module exposed as api to
-    // allow network testing all modules
+    testImplementation project(":testutils")
     testImplementation Libraries.okHttp
     testImplementation Libraries.retrofitRxJavaAdapter
     testImplementation Libraries.retrofitRxMoshiConverter
     testImplementation Libraries.moshiKotlin
+
 }

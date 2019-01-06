@@ -1,4 +1,4 @@
-package com.adambennett.api.service.testutils
+package com.adambennett.testutils
 
 fun Any.getStringFromResource(filePath: String): String =
     this::class.java.getResource("/$filePath").readText()

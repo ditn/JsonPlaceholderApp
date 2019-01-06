@@ -29,7 +29,6 @@ class PlaceholderService internal constructor(
         .map { list ->
             list.map {
                 User(
-                    email = it.email,
                     userName = it.username,
                     userId = it.id
                 )

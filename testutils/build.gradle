@@ -1,0 +1,38 @@
+apply plugin: 'kotlin'
+apply from: "$rootDir/quality/ktlint.gradle"
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath Libraries.kotlinGradlePlugin
+    }
+}
+
+sourceCompatibility = Versions.javaCompatibilityVersion
+targetCompatibility = Versions.javaCompatibilityVersion
+
+test {
+    testLogging {
+        events 'skipped', 'failed', 'standardOut', 'standardError'
+    }
+}
+
+dependencies {
+    implementation Libraries.kotlin
+    implementation Libraries.okHttp
+    // Retrofit + converters/adapters
+    implementation Libraries.retrofit
+    implementation Libraries.retrofitRxJavaAdapter
+    implementation Libraries.retrofitRxMoshiConverter
+    implementation Libraries.moshiKotlin
+    // Service Location
+    implementation Libraries.koin
+    // Test specific
+    implementation Libraries.json
+    implementation Libraries.mockitoKotlin
+    implementation Libraries.kotlinJunit
+    implementation Libraries.kluent
+    implementation Libraries.okHttpMock
+}

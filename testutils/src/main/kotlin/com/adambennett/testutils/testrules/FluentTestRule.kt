@@ -1,4 +1,4 @@
-package com.adambennett.api.service.testutils.testrules
+package com.adambennett.testutils.testrules
 
 import org.junit.rules.TestRule
 import org.junit.runner.Description
