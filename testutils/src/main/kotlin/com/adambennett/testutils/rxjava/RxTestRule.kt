@@ -13,7 +13,7 @@ fun rxInit(block: RxInit.() -> Unit) =
         RxJavaPlugins.reset()
     }
 
-class RxInit {
+open class RxInit {
 
     fun computation(scheduler: Scheduler) {
         RxJavaPlugins.setComputationSchedulerHandler { scheduler }

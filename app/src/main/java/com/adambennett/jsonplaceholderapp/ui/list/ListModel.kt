@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.PublishSubject
-import timber.log.Timber
 
 class ListModel(
     private val processor: PostsListProcessor
@@ -30,11 +29,16 @@ class ListModel(
             // Create the stream without requiring anyone to subscribe to it. This keeps the stream
             // alive when the UI disconnects.
             .autoConnect(0)
-            .doOnNext { Timber.d("OnNext $it") }
 
     override fun states(): Observable<ViewState> = viewStateSubject
 }
 
+/**
+ * Realistically for a more complex app, [ViewState] would be an interface and [Data] would be a
+ * data class. In this instance, here we'd use a [Observable.scan] operator and mutate the
+ * data class (ie copy and change fields - it's not actually mutable) based on the previous state.
+ * However here we don't need to as the app can be modeled easily just using sealed classes.
+ */
 private fun Result.toViewState(): ViewState = when (this) {
     ResultLoading -> Loading
     is ResultData<*> -> Data(this.data as List<ListDisplayModel>)
