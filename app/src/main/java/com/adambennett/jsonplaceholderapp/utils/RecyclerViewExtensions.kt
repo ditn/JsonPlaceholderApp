@@ -1,6 +1,5 @@
 package com.adambennett.jsonplaceholderapp.utils
 
-import android.content.Context
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
@@ -33,9 +32,3 @@ fun <T> RecyclerView.Adapter<*>.autoNotify(
 
     diff.dispatchUpdatesTo(this)
 }
-
-/**
- * Returns the current [Context] for the [RecyclerView.ViewHolder].
- */
-val RecyclerView.ViewHolder.context: Context
-    get() = this.itemView.context

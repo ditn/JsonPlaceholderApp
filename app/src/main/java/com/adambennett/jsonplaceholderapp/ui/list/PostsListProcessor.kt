@@ -2,7 +2,13 @@ package com.adambennett.jsonplaceholderapp.ui.list
 
 import com.adambennett.api.service.PlaceholderService
 import com.adambennett.api.service.models.User
-import com.adambennett.jsonplaceholderapp.IncrementingMap
+import com.adambennett.jsonplaceholderapp.ui.mvi.Action
+import com.adambennett.jsonplaceholderapp.ui.mvi.LoadPostsAction
+import com.adambennett.jsonplaceholderapp.ui.mvi.Result
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultData
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultError
+import com.adambennett.jsonplaceholderapp.ui.mvi.ResultLoading
+import com.adambennett.jsonplaceholderapp.utils.IncrementingMap
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.rxkotlin.Singles
@@ -21,7 +27,7 @@ class PostsListProcessor(placeholderService: PlaceholderService) {
         placeholderService.getUsers()
     ).toObservable()
         .map { (comments, posts, users) ->
-            val userMap: Map<Int, User> = users.associateBy { it.userId }
+            val userMap: Map<Int, User> = users.associateBy { it.id }
             val commentCountMap = IncrementingMap().apply {
                 comments.forEach { put(it.postId) }
             }

@@ -1,4 +1,6 @@
-package com.adambennett.jsonplaceholderapp.ui.list
+package com.adambennett.jsonplaceholderapp.ui.mvi
+
+import com.adambennett.jsonplaceholderapp.ui.list.ListDisplayModel
 
 /**
  * These represent the current state of the View and all the data required for it to render

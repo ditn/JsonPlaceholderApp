@@ -30,7 +30,7 @@ class PlaceholderService internal constructor(
             list.map {
                 User(
                     userName = it.username,
-                    userId = it.id
+                    id = it.id
                 )
             }
         }

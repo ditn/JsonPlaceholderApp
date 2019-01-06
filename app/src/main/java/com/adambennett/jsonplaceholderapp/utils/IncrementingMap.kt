@@ -1,7 +1,7 @@
-package com.adambennett.jsonplaceholderapp
+package com.adambennett.jsonplaceholderapp.utils
 
 /**
- * If minSdk were 24, I could use merge(it, 1, Int::plus) instead or comput - but this will do
+ * If minSdk were 24, I could use merge(it, 1, Int::plus) instead or compute - but this will do
  * for now.
  */
 class IncrementingMap : HashMap<Int, Int>() {

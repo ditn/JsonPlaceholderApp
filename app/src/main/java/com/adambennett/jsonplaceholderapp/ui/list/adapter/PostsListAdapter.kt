@@ -28,7 +28,7 @@ class PostsListAdapter(
         holder.bind(items[position])
     }
 
-    class PostViewHolder internal constructor(
+    class PostViewHolder constructor(
         itemView: View,
         private val postSelector: (ListDisplayModel) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {

@@ -41,9 +41,6 @@ dependencies {
     implementation Libraries.kotlin
     implementation Libraries.appCompat
     implementation Libraries.constraintLayout
-    implementation Libraries.ktxCore
-    implementation Libraries.ktxFragments
-    implementation Libraries.ktxViewModel
     implementation Libraries.rxBindingV4
     implementation Libraries.rxAndroid
     implementation Libraries.rxKotlin

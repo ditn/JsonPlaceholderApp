@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.adambennett.jsonplaceholderapp.R
 import com.adambennett.jsonplaceholderapp.ui.list.ListDisplayModel
 import com.adambennett.jsonplaceholderapp.utils.consume
+import com.adambennett.jsonplaceholderapp.utils.unsafeLazy
 import kotlinx.android.synthetic.main.activity_detail.text_view_body as textViewBody
 import kotlinx.android.synthetic.main.activity_detail.text_view_number_of_comments as textViewComments
 import kotlinx.android.synthetic.main.activity_detail.text_view_title as textViewTitle
@@ -14,9 +15,9 @@ import kotlinx.android.synthetic.main.activity_detail.text_view_username as text
 
 class DetailActivity : AppCompatActivity() {
 
-    private val displayModel by lazy(LazyThreadSafetyMode.NONE) {
+    private val displayModel by unsafeLazy {
         intent?.getParcelableExtra(EXTRA_DISPLAY_MODEL) as? ListDisplayModel
-            ?: throw IllegalArgumentException("Display modle must be passed to Activity via Intent")
+            ?: throw IllegalArgumentException("Display model must be passed to Activity via Intent")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

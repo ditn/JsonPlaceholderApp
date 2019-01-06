@@ -48,5 +48,4 @@ dependencies {
     testImplementation Libraries.retrofitRxJavaAdapter
     testImplementation Libraries.retrofitRxMoshiConverter
     testImplementation Libraries.moshiKotlin
-
 }

@@ -6,7 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.adambennett.jsonplaceholderapp.R
 import com.adambennett.jsonplaceholderapp.ui.detail.DetailActivity
 import com.adambennett.jsonplaceholderapp.ui.list.adapter.PostsListAdapter
+import com.adambennett.jsonplaceholderapp.ui.mvi.Data
+import com.adambennett.jsonplaceholderapp.ui.mvi.Error
+import com.adambennett.jsonplaceholderapp.ui.mvi.Loading
+import com.adambennett.jsonplaceholderapp.ui.mvi.MviView
+import com.adambennett.jsonplaceholderapp.ui.mvi.RefreshIntent
+import com.adambennett.jsonplaceholderapp.ui.mvi.UserIntent
+import com.adambennett.jsonplaceholderapp.ui.mvi.ViewState
 import com.adambennett.jsonplaceholderapp.utils.toast
+import com.adambennett.jsonplaceholderapp.utils.unsafeLazy
 import com.jakewharton.rxbinding2.support.v4.widget.refreshes
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -20,9 +28,7 @@ class ListActivity : AppCompatActivity(), MviView {
 
     private val compositeDisposable = CompositeDisposable()
     private val model: ListModel by viewModel()
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        PostsListAdapter { onPostSelected(it) }
-    }
+    private val adapter by unsafeLazy { PostsListAdapter { onPostSelected(it) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

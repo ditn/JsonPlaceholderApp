@@ -17,7 +17,9 @@ class PlaceholderApplication : Application() {
 
         startKoin(
             this,
-            listOf(networkModule, apiModule,
+            listOf(
+                networkModule,
+                apiModule,
                 viewModelModule,
                 mainModule
             )

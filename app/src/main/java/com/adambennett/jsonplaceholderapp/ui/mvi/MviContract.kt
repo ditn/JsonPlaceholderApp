@@ -1,4 +1,4 @@
-package com.adambennett.jsonplaceholderapp.ui.list
+package com.adambennett.jsonplaceholderapp.ui.mvi
 
 import io.reactivex.Observable
 
