@@ -1,4 +1,4 @@
-package com.adambennett.jsonplaceholderapp
+package com.adambennett.jsonplaceholderapp.koin
 
 import com.adambennett.network.interfaces.Logger
 import org.koin.dsl.module.module

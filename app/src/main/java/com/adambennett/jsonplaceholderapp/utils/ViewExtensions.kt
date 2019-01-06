@@ -1,4 +1,4 @@
-package com.adambennett.jsonplaceholderapp.ui.utils
+package com.adambennett.jsonplaceholderapp.utils
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,8 +1,8 @@
 package com.adambennett.jsonplaceholderapp
 
-class IncrementingMap : HashMap<String, Int>() {
+class IncrementingMap : HashMap<Int, Int>() {
 
-    fun put(key: String) {
+    fun put(key: Int) {
         if (containsKey(key)) {
             val i = get(key)!!
             put(key, i + 1)

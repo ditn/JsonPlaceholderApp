@@ -9,13 +9,13 @@ class IncrementingMapTest {
     fun `can add keys`() {
         IncrementingMap()
             .apply {
-                put("one")
-                put("two")
-                put("three")
+                put(1)
+                put(2)
+                put(3)
             }.run {
-                this `should contain` ("one" to 1)
-                this `should contain` ("two" to 1)
-                this `should contain` ("three" to 1)
+                this `should contain` (1 to 1)
+                this `should contain` (2 to 1)
+                this `should contain` (3 to 1)
             }
     }
 
@@ -23,11 +23,11 @@ class IncrementingMapTest {
     fun `adding same key more than once increments value`() {
         IncrementingMap()
             .apply {
-                put("one")
-                put("one")
-                put("one")
+                put(1)
+                put(1)
+                put(1)
             }.run {
-                this `should contain` ("one" to 3)
+                this `should contain` (1 to 3)
             }
     }
 }
