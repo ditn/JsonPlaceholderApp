@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_main.swipe_refresh_layout as swip
 class ListActivity : AppCompatActivity(), MviView {
 
     private val compositeDisposable = CompositeDisposable()
-    private val model: ListViewModel by viewModel()
+    private val model: ListModel by viewModel()
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         PostsListAdapter { onPostSelected(it) }
     }
@@ -33,7 +33,7 @@ class ListActivity : AppCompatActivity(), MviView {
 
         compositeDisposable +=
             model.states()
-                .subscribeBy { render(it) }
+                .subscribeBy(onNext = this::render)
 
         model.processIntents(intents())
     }
@@ -43,8 +43,15 @@ class ListActivity : AppCompatActivity(), MviView {
         compositeDisposable.clear()
     }
 
+    /**
+     * If there were more user actions, here we'd merge the Observables into a single stream of
+     * UserIntent objects.
+     */
     override fun intents(): Observable<UserIntent> = swipeLayout.refreshes()
         .map { RefreshIntent }
+        // Emit refresh on first subscribe to trigger initial loading
+        .startWith(RefreshIntent)
+        .cast(UserIntent::class.java)
 
     override fun render(state: ViewState) {
         when (state) {
