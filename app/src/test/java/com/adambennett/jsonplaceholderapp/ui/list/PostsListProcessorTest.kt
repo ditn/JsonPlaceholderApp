@@ -3,12 +3,8 @@ package com.adambennett.jsonplaceholderapp.ui.list
 import com.adambennett.api.service.models.Comment
 import com.adambennett.api.service.models.Post
 import com.adambennett.api.service.models.User
-import com.adambennett.jsonplaceholderapp.ui.mvi.Action
-import com.adambennett.jsonplaceholderapp.ui.mvi.LoadPostsAction
-import com.adambennett.jsonplaceholderapp.ui.mvi.ResultData
-import com.adambennett.jsonplaceholderapp.ui.mvi.ResultError
-import com.adambennett.jsonplaceholderapp.ui.mvi.ResultLoading
-import com.adambennett.jsonplaceholderapp.ui.mvi.UnregistedAction
+import com.adambennett.jsonplaceholderapp.ui.list.models.PostsAction
+import com.adambennett.jsonplaceholderapp.ui.list.models.PostsResult
 import com.adambennett.testutils.rxjava.just
 import com.adambennett.testutils.rxjava.rxInit
 import com.nhaarman.mockito_kotlin.mock
@@ -25,26 +21,9 @@ class PostsListProcessorTest {
     val rxRule = rxInit { ioTrampoline() }
 
     @Test
-    fun `throws with unregistered action type`() {
-        UnregistedAction.just()
-            .cast(Action::class.java)
-            .compose(
-                PostsListProcessor(
-                    mock {
-                        on { getComments() } `it returns` Single.never()
-                        on { getPosts() } `it returns` Single.never()
-                        on { getUsers() } `it returns` Single.never()
-                    }
-                ).actionProcessor
-            )
-            .test()
-            .assertError(IllegalArgumentException::class.java)
-    }
-
-    @Test
     fun `returns result error when request fails`() {
-        LoadPostsAction.just()
-            .cast(Action::class.java)
+        PostsAction.LoadPosts.just()
+            .cast(PostsAction::class.java)
             .compose(
                 PostsListProcessor(
                     mock {
@@ -52,21 +31,21 @@ class PostsListProcessorTest {
                         on { getPosts() } `it returns` Single.just(emptyList())
                         on { getUsers() } `it returns` Single.just(emptyList())
                     }
-                ).actionProcessor
+                )::apply
             )
             .test()
             .assertNoErrors()
             .values()
             .apply {
-                this[0] `should be instance of` ResultLoading::class.java
-                this[1] `should be instance of` ResultError::class.java
+                this[0] `should be instance of` PostsResult.Loading::class.java
+                this[1] `should be instance of` PostsResult.Error::class.java
             }
     }
 
     @Test
     fun `returns list as expected`() {
-        LoadPostsAction.just()
-            .cast(Action::class.java)
+        PostsAction.LoadPosts.just()
+            .cast(PostsAction::class.java)
             .compose(
                 PostsListProcessor(
                     mock {
@@ -107,15 +86,15 @@ class PostsListProcessorTest {
                             )
                         )
                     }
-                ).actionProcessor
+                )::apply
             )
             .test()
             .assertNoErrors()
             .values()
             .apply {
-                this[0] `should be instance of` ResultLoading::class.java
-                this[1] `should be instance of` ResultData::class.java
-                val result = this[1] as ResultData<List<ListDisplayModel>>
+                this[0] `should be instance of` PostsResult.Loading::class.java
+                this[1] `should be instance of` PostsResult.Success::class.java
+                val result = this[1] as PostsResult.Success
 
                 result.data `should contain` ListDisplayModel(
                     title = "title",
