@@ -36,7 +36,6 @@ interface MviResult
  */
 interface MviViewState
 
-
 /**
  * The Reducer is responsible for generating the [MviViewState] which the View will use to render
  * itself. The View should be stateless in the sense that the [MviViewState] should be sufficient

@@ -20,8 +20,9 @@ import timber.log.Timber
 class PostsListProcessor(placeholderService: PlaceholderService) :
     MviActionProcessor<PostsAction, PostsResult>() {
 
-    override fun getActionProcessors(shared: Observable<PostsAction>): List<Observable<PostsResult>> =
-        listOf(shared.connect(loadPostsProcessor))
+    override fun getActionProcessors(
+        shared: Observable<PostsAction>
+    ): List<Observable<PostsResult>> = listOf(shared.connect(loadPostsProcessor))
 
     private val loadPostsProcessor: ObservableTransformer<PostsAction, PostsResult> =
         ObservableTransformer { actions ->

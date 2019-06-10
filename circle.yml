@@ -1,16 +1,16 @@
 version: 2
 jobs:
   test:
-    resource_class: large
+    resource_class: medium
     docker:
-    - image: circleci/android:api-28-alpha
+    - image: circleci/android:api-28
     environment:
       _JAVA_OPTIONS: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
     steps:
     - checkout
     - restore_cache:
         keys:
-        - gradle-{{ checksum "build.gradle.kts" }}-{{ checksum "app/build.gradle.kts" }}
+        - gradle-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
         - gradle-
 
     - restore_cache:
@@ -27,7 +27,7 @@ jobs:
     - save_cache:
         paths:
         - ~/.gradle
-        key: gradle-{{ checksum "build.gradle.kts" }}-{{ checksum "app/build.gradle.kts" }}
+        key: gradle-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
 
     - save_cache:
         key: android-cache-{{ epoch }}
@@ -38,12 +38,12 @@ jobs:
   checks:
     resource_class: large
     docker:
-    - image: circleci/android:api-28-alpha
+    - image: circleci/android:api-28
     steps:
     - checkout
     - restore_cache:
         keys:
-        - gradle-{{ checksum "build.gradle.kts" }}-{{ checksum "app/build.gradle.kts" }}
+        - gradle-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
         - gradle-
 
     - run:

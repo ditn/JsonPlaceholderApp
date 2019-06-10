@@ -1,41 +1,50 @@
 package com.adambennett.jsonplaceholderapp.ui.list
 
 import com.adambennett.jsonplaceholderapp.testutils.rxInitAndroid
-import com.adambennett.jsonplaceholderapp.ui.mvi.Data
-import com.adambennett.jsonplaceholderapp.ui.mvi.Error
-import com.adambennett.jsonplaceholderapp.ui.mvi.Loading
-import com.adambennett.jsonplaceholderapp.ui.mvi.RefreshIntent
-import com.adambennett.jsonplaceholderapp.ui.mvi.ResultData
-import com.adambennett.jsonplaceholderapp.ui.mvi.ResultError
-import com.adambennett.jsonplaceholderapp.ui.mvi.ResultLoading
+import com.adambennett.jsonplaceholderapp.ui.list.models.PostsResult
+import com.adambennett.jsonplaceholderapp.ui.list.models.PostsViewState
+import com.adambennett.jsonplaceholderapp.ui.list.models.UserIntent
+import com.adambennett.jsonplaceholderapp.ui.mvi.ViewStateEvent
 import com.adambennett.testutils.rxjava.just
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
-import io.reactivex.ObservableTransformer
 import org.amshove.kluent.`it returns`
-import org.amshove.kluent.`should be instance of`
+import org.amshove.kluent.`should equal`
 import org.junit.Rule
 import org.junit.Test
 
 class ListModelTest {
 
     @get:Rule
-    val rxRule = rxInitAndroid { mainTrampoline() }
+    val rxRule = rxInitAndroid {
+        mainTrampoline()
+        ioTrampoline()
+    }
 
     @Test
     fun `accepts loading event, returns data, mapped to ViewState`() {
         ListModel(
             mock {
-                on { actionProcessor } `it returns` ObservableTransformer {
-                    ResultData(listOf(ListDisplayModel("", "", 1, ""))).just()
-                }
+                on { apply(any()) } `it returns`
+                    PostsResult.Success(listOf(ListDisplayModel("", "", 1, ""))).just<PostsResult>()
             }
         ).apply {
-            processIntents(RefreshIntent.just())
-            states()
+            processIntents(UserIntent.Refresh.just())
+            states
                 .test()
                 .values()
+                .first()
                 .apply {
-                    this[0] `should be instance of` Data::class.java
+                    this `should equal` PostsViewState(
+                        data = listOf(
+                            ListDisplayModel(
+                                "",
+                                "",
+                                1,
+                                ""
+                            )
+                        )
+                    )
                 }
         }
     }
@@ -44,17 +53,17 @@ class ListModelTest {
     fun `accepts loading event, returns loading, mapped to ViewState`() {
         ListModel(
             mock {
-                on { actionProcessor } `it returns` ObservableTransformer {
-                    ResultLoading.just()
-                }
+                on { apply(any()) } `it returns`
+                    PostsResult.Loading.just<PostsResult>()
             }
         ).apply {
-            processIntents(RefreshIntent.just())
-            states()
+            processIntents(UserIntent.Refresh.just())
+            states
                 .test()
                 .values()
+                .first()
                 .apply {
-                    this[0] `should be instance of` Loading::class.java
+                    this `should equal` PostsViewState(refreshing = true)
                 }
         }
     }
@@ -63,17 +72,16 @@ class ListModelTest {
     fun `accepts loading event, returns error, mapped to ViewState`() {
         ListModel(
             mock {
-                on { actionProcessor } `it returns` ObservableTransformer {
-                    ResultError("").just()
-                }
+                on { apply(any()) } `it returns` PostsResult.Error("").just<PostsResult>()
             }
         ).apply {
-            processIntents(RefreshIntent.just())
-            states()
+            processIntents(UserIntent.Refresh.just())
+            states
                 .test()
                 .values()
+                .first()
                 .apply {
-                    this[0] `should be instance of` Error::class.java
+                    this `should equal` PostsViewState(error = ViewStateEvent(""))
                 }
         }
     }
