@@ -1,5 +1,7 @@
 package com.adambennett.jsonplaceholderapp.ui.mvi
 
+import java.util.concurrent.atomic.AtomicBoolean
+
 /**
  * Used to represent a one-shot UI event within an [MviViewState], so that we don't have to
  * toggle [Boolean] values or use timers in Rx or anything too wild. [consume] allows you to
@@ -10,15 +12,14 @@ package com.adambennett.jsonplaceholderapp.ui.mvi
  */
 data class ViewStateEvent<T>(val payload: T? = null) {
 
-    var isConsumed: Boolean = false
-        private set
+    val isConsumed = AtomicBoolean(false)
 
     /**
      * Allows you to handle the [payload] of the [ViewStateEvent] without marking the event as
      * consumed.
      */
     fun handle(action: (T?) -> Unit) {
-        if (!isConsumed) {
+        if (isConsumed.get()) {
             action(payload)
         }
     }
@@ -28,9 +29,8 @@ data class ViewStateEvent<T>(val payload: T? = null) {
      * consumed on access.
      */
     fun consume(action: (T?) -> Unit) {
-        if (!isConsumed) {
+        if (isConsumed.getAndSet(true)) {
             action(payload)
-            isConsumed = true
         }
     }
 }
