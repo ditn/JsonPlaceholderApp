@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply from: "$rootDir/quality/ktlint.gradle"
+apply from: "$rootDir/quality/ktlint.gradle.kts"
 
 android {
     compileSdkVersion Versions.compileSdk
@@ -41,7 +41,8 @@ dependencies {
     implementation Libraries.kotlin
     implementation Libraries.appCompat
     implementation Libraries.constraintLayout
-    implementation Libraries.rxBindingV4
+    implementation Libraries.rxBindingAppCompat
+    implementation Libraries.rxBindingSwipeRefreshLayout
     implementation Libraries.rxAndroid
     implementation Libraries.rxKotlin
     implementation Libraries.koin

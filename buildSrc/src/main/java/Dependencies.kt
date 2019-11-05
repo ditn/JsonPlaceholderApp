@@ -1,22 +1,22 @@
 object Versions {
 
     // Release info
-    const val applicationId = "com.adambennett.jsonplaceholderapp"
-    const val minSdk = 21
-    const val targetSdk = 28
-    const val compileSdk = 28
+    const val applicationId = "com.adambennett.template"
+    const val minSdk = 24
+    const val targetSdk = 29
+    const val compileSdk = 29
     const val releaseCode = 1
-    const val releaseName = "1.0.0"
+    const val releaseName = "0.0.1"
 
     // Build tools and languages
-    const val androidPlugin = "3.2.1"
-    const val kotlin = "1.3.11"
-    const val googleServicesPlugin = "4.0.1"
+    const val androidPlugin = "4.0.0-alpha01"
+    const val kotlin = "1.3.50"
+    const val googleServicesPlugin = "4.2.0"
     const val coveralls = "2.8.2"
     const val buildProperties = "0.4"
-    const val ktlint = "0.29.0"
-    const val kotlinJvmTarget = "1.6"
-    const val javaCompatibilityVersion = 1.7
+    const val ktlint = "0.35.0"
+    const val kotlinJvmTarget = "1.8"
+    const val javaCompatibilityVersion = 1.8
 
     // Support Libraries
     const val googleServices = "15.0.1"
@@ -24,37 +24,41 @@ object Versions {
     const val firebaseCore = "16.0.1"
 
     // AndroidX
-    const val appCompat = "1.0.0"
-    const val design = "1.1.0-alpha02"
+    const val activity = "1.1.0-rc01"
+    const val appCompat = "1.1.0-rc01"
+    const val design = "1.1.0-alpha10"
     const val recyclerView = "1.0.0"
     const val cardView = "1.0.0"
     const val constraintLayout = "2.0.0-alpha2"
-    const val lifecycle = "2.0.0-rc01"
-    const val annotations = "1.0.0"
+    const val lifecycle = "2.2.0-alpha05"
+    const val lifecycleViewModelKtx = "2.1.0"
+    const val annotations = "1.1.0-beta01"
     const val multidex = "2.0.0"
     const val dynamicAnims = "1.0.0"
     const val room = "2.0.0-rc01"
 
     // KTX
-    const val ktxCore = "1.0.0"
-    const val ktxFragments = "1.0.0"
-    const val ktxViewModel = "2.0.0"
+    const val ktxCore = "1.1.0-alpha05"
+    const val ktxFragments = "1.1.0-rc04"
+    const val ktxActivity = "1.0.0-rc01"
+    const val ktxViewModel = "2.2.0-alpha05"
 
     // Networking, RxJava
     const val retrofit = "2.4.0"
     const val okHttp = "3.10.0"
     const val okIo = "1.14.1"
     const val moshi = "1.8.0"
-    const val rxKotlin = "2.2.0"
-    const val rxAndroid = "2.0.2"
-    const val rxBinding = "2.1.1"
+    const val rxJava = "2.2.12"
+    const val rxKotlin = "2.4.0"
+    const val rxAndroid = "2.1.1"
+    const val rxBinding = "3.0.0"
     const val rxFingerprint = "2.2.1"
 
     // Injection
-    const val dagger = "2.16"
-    const val koin = "1.0.2"
+    const val dagger = "2.24"
+    const val koin = "2.0.1"
 
-    // Utils, Ethereum
+    // Utils
     const val commonsCodec = "1.3"
     const val commonsLang = "3.4"
     const val commonsCli = "1.3"
@@ -68,15 +72,16 @@ object Versions {
     const val fabricTools = "1.24.4"
 
     // Testing
-    const val mockito = "2.10.0"
-    const val mockitoKotlin = "1.5.0"
-    const val kluent = "1.19"
+    const val mockito = "2.27.0"
+    const val mockitoKotlin = "2.1.0"
+    const val kluent = "1.53"
     const val junit = "4.12"
     const val robolectric = "3.8"
     const val json = "20140107"
-    const val espresso = "3.1.0"
+    const val espresso = "3.2.0-alpha04"
     const val jacoco = "0.8.1"
-    const val testRunner = "1.1.0"
+    const val testRunner = "1.2.0-alpha04"
+    const val textJunit = "1.1.1-alpha04"
 }
 
 object Libraries {
@@ -89,9 +94,10 @@ object Libraries {
     const val coveralls = "org.kt3k.gradle.plugin:coveralls-gradle-plugin:${Versions.coveralls}"
     const val googleServicesPlugin = "com.google.gms:google-services:${Versions.googleServicesPlugin}"
     const val buildProperties = "com.novoda:gradle-build-properties-plugin:${Versions.buildProperties}"
-    const val ktlint = "com.github.shyiko:ktlint:${Versions.ktlint}"
+    const val ktlint = "com.pinterest:ktlint:${Versions.ktlint}"
 
     // AndroidX
+    const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     const val design = "com.google.android.material:material:${Versions.design}"
     const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
@@ -105,6 +111,7 @@ object Libraries {
     // Lifecycle
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
+    const val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewModelKtx}"
 
     // Room
     const val roomRx = "androidx.room:room-rxjava2:${Versions.room}"
@@ -114,6 +121,7 @@ object Libraries {
     // KTX
     const val ktxCore = "androidx.core:core-ktx:${Versions.ktxCore}"
     const val ktxFragments = "androidx.fragment:fragment-ktx:${Versions.ktxFragments}"
+    const val ktxActivity = "androidx.activity:activity-ktx:${Versions.ktxActivity}"
     const val ktxViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.ktxViewModel}"
 
     // Google & Firebase
@@ -121,7 +129,7 @@ object Libraries {
     const val firebaseMessaging = "com.google.firebase:firebase-messaging:${Versions.firebaseMessaging}"
     const val googlePlayServicesBase = "com.google.android.gms:play-services-base:${Versions.googleServices}"
 
-    // Networking, RxJava
+    // Networking
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitRxMoshiConverter = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
     const val retrofitRxJavaAdapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
@@ -131,15 +139,28 @@ object Libraries {
     const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
     const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshi}"
     const val moshiKotlinCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
+
+    // RxJava
+    const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJava}"
     const val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
     const val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
-    const val rxBindingV4 = "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:${Versions.rxBinding}"
-    const val rxBindingV7 = "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:${Versions.rxBinding}"
+    const val rxBindingPlatform = "com.jakewharton.rxbinding3:rxbinding:${Versions.rxBinding}"
+    const val rxBindingMaterial =  "com.jakewharton.rxbinding3:rxbinding-material:${Versions.rxBinding}"
+    const val rxBindingCore =  "com.jakewharton.rxbinding3:rxbinding-core:${Versions.rxBinding}"
+    const val rxBindingAppCompat =  "com.jakewharton.rxbinding3:rxbinding-appcompat:${Versions.rxBinding}"
+    const val rxBindingDrawerlayout =  "com.jakewharton.rxbinding3:rxbinding-drawerlayout:${Versions.rxBinding}"
+    const val rxBindingRecyclerView =  "com.jakewharton.rxbinding3:rxbinding-recyclerview:${Versions.rxBinding}"
+    const val rxBindingSlidingPaneLayout = "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:${Versions.rxBinding}"
+    const val rxBindingSwipeRefreshLayout =  "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${Versions.rxBinding}"
+    const val rxBindingViewPager =  "com.jakewharton.rxbinding3:rxbinding-viewpager:${Versions.rxBinding}"
+
     const val rxFingerprint = "com.mtramin:rxfingerprint:${Versions.rxFingerprint}"
 
     // Injection
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
-    const val daggerKapt = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val daggerAndroid = "com.google.dagger:dagger-android:${Versions.dagger}"
+    const val daggerAndroidSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
+    const val daggerAndroidKapt = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     const val koin = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
     const val koinTest = "org.koin:koin-test:${Versions.koin}"
 
@@ -158,15 +179,15 @@ object Libraries {
 
     // Testing
     const val mockito = "org.mockito:mockito-core:${Versions.mockito}"
-    const val mockitoKotlin = "com.nhaarman:mockito-kotlin:${Versions.mockitoKotlin}"
-    const val kluent = "org.amshove.kluent:kluent:${Versions.kluent}"
+    const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
+    const val kluent = "org.amshove.kluent:kluent-android:${Versions.kluent}"
     const val kotlinJunit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
     const val junit = "junit:junit:${Versions.junit}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
     const val json = "org.json:json:${Versions.json}"
     const val testRules = "androidx.test:rules:${Versions.testRunner}"
     const val testRunner = "androidx.test:runner:${Versions.testRunner}"
-    const val testJunit = "androidx.test.ext:junit:${Versions.testRunner}"
+    const val testJunit = "androidx.test.ext:junit-ktx:${Versions.textJunit}"
     const val testMonitor = "androidx.test:monitor:${Versions.testRunner}"
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     const val okHttpMock = "com.squareup.okhttp3:mockwebserver:${Versions.okHttp}"
