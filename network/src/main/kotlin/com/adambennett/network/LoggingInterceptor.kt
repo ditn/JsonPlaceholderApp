@@ -1,13 +1,13 @@
 package com.adambennett.network
 
 import com.adambennett.network.interfaces.Logger
+import java.io.IOException
+import java.util.Locale
 import okhttp3.Interceptor
 import okhttp3.RequestBody
 import okhttp3.Response
 import okhttp3.ResponseBody
 import okio.Buffer
-import java.io.IOException
-import java.util.Locale
 
 class LoggingInterceptor(private val logger: Logger) : Interceptor {
 

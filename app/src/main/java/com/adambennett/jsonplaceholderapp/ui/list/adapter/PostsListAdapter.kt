@@ -8,8 +8,8 @@ import com.adambennett.jsonplaceholderapp.R
 import com.adambennett.jsonplaceholderapp.ui.list.ListDisplayModel
 import com.adambennett.jsonplaceholderapp.utils.autoNotify
 import com.adambennett.jsonplaceholderapp.utils.inflate
-import kotlinx.android.synthetic.main.item_post.view.*
 import kotlin.properties.Delegates
+import kotlinx.android.synthetic.main.item_post.view.*
 
 class PostsListAdapter(
     private val postSelector: (ListDisplayModel) -> Unit
@@ -28,7 +28,7 @@ class PostsListAdapter(
         holder.bind(items[position])
     }
 
-    class PostViewHolder constructor(
+    class PostViewHolder(
         itemView: View,
         private val postSelector: (ListDisplayModel) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {

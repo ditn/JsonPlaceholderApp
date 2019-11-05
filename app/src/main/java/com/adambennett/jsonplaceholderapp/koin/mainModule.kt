@@ -1,7 +1,7 @@
 package com.adambennett.jsonplaceholderapp.koin
 
 import com.adambennett.network.interfaces.Logger
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 import timber.log.Timber
 
 val mainModule = module {

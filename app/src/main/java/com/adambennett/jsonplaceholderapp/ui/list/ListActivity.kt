@@ -12,15 +12,15 @@ import com.adambennett.jsonplaceholderapp.ui.list.models.UserIntent
 import com.adambennett.jsonplaceholderapp.ui.mvi.MviView
 import com.adambennett.jsonplaceholderapp.utils.toast
 import com.adambennett.jsonplaceholderapp.utils.unsafeLazy
-import com.jakewharton.rxbinding2.support.v4.widget.refreshes
+import com.jakewharton.rxbinding3.swiperefreshlayout.refreshes
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import kotlinx.android.synthetic.main.activity_main.recycler_view as recyclerView
 import kotlinx.android.synthetic.main.activity_main.swipe_refresh_layout as swipeLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, PostsViewState> {
 
@@ -34,6 +34,7 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
             // Emit refresh on first subscribe to trigger initial loading
             .startWith(UserIntent.Refresh)
             .cast(UserIntent::class.java)
+            .observeOn(AndroidSchedulers.mainThread(), false)
     }
 
     private val compositeDisposable = CompositeDisposable()
@@ -64,7 +65,6 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
     }
 
     override fun render(state: PostsViewState) {
-        Timber.d("Adam state $state")
         with(state) {
             swipeLayout.isRefreshing = refreshing
             adapter.items = data

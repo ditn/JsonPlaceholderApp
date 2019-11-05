@@ -1,5 +1,5 @@
 apply plugin: 'kotlin'
-apply from: "$rootDir/quality/ktlint.gradle"
+apply from: "$rootDir/quality/ktlint.gradle.kts"
 
 buildscript {
     repositories {
