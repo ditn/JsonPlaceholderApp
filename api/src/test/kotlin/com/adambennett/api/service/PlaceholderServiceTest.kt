@@ -9,15 +9,16 @@ import com.adambennett.api.service.testutils.mockWebServerInit
 import com.adambennett.testutils.getStringFromResource
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import org.amshove.kluent.`should equal to`
+import org.amshove.kluent.shouldBeEqualTo
+import org.amshove.kluent.shouldEqualTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.koin.standalone.StandAloneContext.startKoin
-import org.koin.standalone.StandAloneContext.stopKoin
-import org.koin.standalone.inject
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
+import org.koin.test.inject
 
 class PlaceholderServiceTest : KoinTest {
 
@@ -25,16 +26,18 @@ class PlaceholderServiceTest : KoinTest {
     private val server: MockWebServer = MockWebServer()
 
     @get:Rule
-    private val mockServerRule = mockWebServerInit(server)
+    val mockServerRule = mockWebServerInit(server)
 
     @Before
     fun setUp() {
-        startKoin(
-            listOf(
-                mockNetworkModule(server),
-                apiModule
+        startKoin {
+            modules(
+                listOf(
+                    mockNetworkModule(server),
+                    apiModule
+                )
             )
-        )
+        }
     }
 
     @After
@@ -57,15 +60,15 @@ class PlaceholderServiceTest : KoinTest {
             .values()
             .first()
             .apply {
-                this[0].id `should equal to` 1
-                this[1].name `should equal to` "quo vero reiciendis velit similique earum"
-                this[2].email `should equal to` "Nikita@garfield.biz"
-                this[3].body `should equal to` "non et atque\noccaecati deserunt quas " +
+                this[0].id shouldEqualTo 1
+                this[1].name shouldBeEqualTo "quo vero reiciendis velit similique earum"
+                this[2].email shouldBeEqualTo "Nikita@garfield.biz"
+                this[3].body shouldBeEqualTo "non et atque\noccaecati deserunt quas " +
                     "accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur " +
                     "itaque dolor\net qui rerum deleniti ut occaecati"
             }
 
-        server.takeRequest().path `should equal to` "/$PATH_COMMENTS"
+        server.takeRequest().path shouldBeEqualTo "/$PATH_COMMENTS"
     }
 
     @Test
@@ -84,11 +87,11 @@ class PlaceholderServiceTest : KoinTest {
             .first()
             .apply {
                 val (userName, id) = this[0]
-                userName `should equal to` "Bret"
-                id `should equal to` 1
+                userName shouldBeEqualTo "Bret"
+                id shouldEqualTo 1
             }
 
-        server.takeRequest().path `should equal to` "/$PATH_USERS"
+        server.takeRequest().path shouldBeEqualTo "/$PATH_USERS"
     }
 
     @Test
@@ -106,16 +109,16 @@ class PlaceholderServiceTest : KoinTest {
             .values()
             .first()
             .apply {
-                this[0].userId `should equal to` 1
-                this[1].id `should equal to` 2
-                this[2].title `should equal to` "ea molestias quasi exercitationem" +
+                this[0].userId shouldEqualTo 1
+                this[1].id shouldEqualTo 2
+                this[2].title shouldBeEqualTo "ea molestias quasi exercitationem" +
                     " repellat qui ipsa sit aut"
-                this[3].body `should equal to` "ullam et saepe reiciendis voluptatem " +
+                this[3].body shouldBeEqualTo "ullam et saepe reiciendis voluptatem " +
                     "adipisci\nsit amet autem assumenda provident rerum culpa\nquis " +
                     "hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt " +
                     "voluptatem rerum illo velit"
             }
 
-        server.takeRequest().path `should equal to` "/$PATH_POSTS"
+        server.takeRequest().path shouldBeEqualTo "/$PATH_POSTS"
     }
 }

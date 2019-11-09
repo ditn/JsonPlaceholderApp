@@ -9,8 +9,8 @@ object Versions {
     const val releaseName = "0.0.1"
 
     // Build tools and languages
-    const val androidPlugin = "4.0.0-alpha01"
-    const val kotlin = "1.3.50"
+    const val androidPlugin = "4.0.0-alpha02"
+    const val kotlin = "1.3.60-eap-25"
     const val googleServicesPlugin = "4.2.0"
     const val coveralls = "2.8.2"
     const val buildProperties = "0.4"
@@ -36,6 +36,9 @@ object Versions {
     const val multidex = "2.0.0"
     const val dynamicAnims = "1.0.0"
     const val room = "2.0.0-rc01"
+
+    // Compose
+    const val compose = "0.1.0-dev02"
 
     // KTX
     const val ktxCore = "1.1.0-alpha05"
@@ -108,6 +111,11 @@ object Libraries {
     const val multidex = "androidx.multidex:multidex:${Versions.multidex}"
     const val dynamicAnims = "androidx.dynamicanimation:dynamicanimation:${Versions.dynamicAnims}"
 
+    // Compose
+    const val composeLayout =  "androidx.ui:ui-layout:${Versions.compose}"
+    const val composeMaterial =  "androidx.ui:ui-material:${Versions.compose}"
+    const val composeTooling =  "androidx.ui:ui-tooling:${Versions.compose}"
+
     // Lifecycle
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
@@ -153,7 +161,6 @@ object Libraries {
     const val rxBindingSlidingPaneLayout = "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:${Versions.rxBinding}"
     const val rxBindingSwipeRefreshLayout =  "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${Versions.rxBinding}"
     const val rxBindingViewPager =  "com.jakewharton.rxbinding3:rxbinding-viewpager:${Versions.rxBinding}"
-
     const val rxFingerprint = "com.mtramin:rxfingerprint:${Versions.rxFingerprint}"
 
     // Injection

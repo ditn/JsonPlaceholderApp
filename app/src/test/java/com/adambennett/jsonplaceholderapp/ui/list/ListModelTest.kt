@@ -6,10 +6,10 @@ import com.adambennett.jsonplaceholderapp.ui.list.models.PostsViewState
 import com.adambennett.jsonplaceholderapp.ui.list.models.UserIntent
 import com.adambennett.jsonplaceholderapp.ui.mvi.ViewStateEvent
 import com.adambennett.testutils.rxjava.just
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.mock
-import org.amshove.kluent.`it returns`
-import org.amshove.kluent.`should equal`
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.mock
+import org.amshove.kluent.itReturns
+import org.amshove.kluent.shouldEqual
 import org.junit.Rule
 import org.junit.Test
 
@@ -25,7 +25,7 @@ class ListModelTest {
     fun `accepts loading event, returns data, mapped to ViewState`() {
         ListModel(
             mock {
-                on { apply(any()) } `it returns`
+                on { apply(any()) } itReturns
                     PostsResult.Success(listOf(ListDisplayModel("", "", 1, ""))).just<PostsResult>()
             }
         ).apply {
@@ -35,7 +35,7 @@ class ListModelTest {
                 .values()
                 .first()
                 .apply {
-                    this `should equal` PostsViewState(
+                    this shouldEqual PostsViewState(
                         data = listOf(
                             ListDisplayModel(
                                 "",
@@ -53,7 +53,7 @@ class ListModelTest {
     fun `accepts loading event, returns loading, mapped to ViewState`() {
         ListModel(
             mock {
-                on { apply(any()) } `it returns`
+                on { apply(any()) } itReturns
                     PostsResult.Loading.just<PostsResult>()
             }
         ).apply {
@@ -63,7 +63,7 @@ class ListModelTest {
                 .values()
                 .first()
                 .apply {
-                    this `should equal` PostsViewState(refreshing = true)
+                    this shouldEqual PostsViewState(refreshing = true)
                 }
         }
     }
@@ -72,7 +72,7 @@ class ListModelTest {
     fun `accepts loading event, returns error, mapped to ViewState`() {
         ListModel(
             mock {
-                on { apply(any()) } `it returns` PostsResult.Error("").just<PostsResult>()
+                on { apply(any()) } itReturns PostsResult.Error("").just<PostsResult>()
             }
         ).apply {
             processIntents(UserIntent.Refresh.just())
@@ -81,7 +81,7 @@ class ListModelTest {
                 .values()
                 .first()
                 .apply {
-                    this `should equal` PostsViewState(error = ViewStateEvent(""))
+                    this shouldEqual PostsViewState(error = ViewStateEvent(""))
                 }
         }
     }

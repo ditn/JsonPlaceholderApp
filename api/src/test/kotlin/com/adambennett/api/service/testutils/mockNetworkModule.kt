@@ -4,7 +4,7 @@ import com.squareup.moshi.Moshi
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockWebServer
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit

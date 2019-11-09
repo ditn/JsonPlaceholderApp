@@ -28,6 +28,10 @@ android {
             }
         }
     }
+
+    kotlinOptions {
+        jvmTarget = Versions.kotlinJvmTarget
+    }
 }
 
 androidExtensions {
@@ -46,12 +50,17 @@ dependencies {
     implementation Libraries.rxAndroid
     implementation Libraries.rxKotlin
     implementation Libraries.koin
+    // Compose
+    implementation Libraries.composeLayout
+    implementation Libraries.composeMaterial
+    implementation Libraries.composeTooling
     // Logging
     implementation Libraries.timber
 
     testImplementation Libraries.kotlinJunit
     testImplementation Libraries.kluent
     testImplementation Libraries.mockitoKotlin
+    testImplementation Libraries.koinTest
 
     testImplementation project(":testutils")
 }

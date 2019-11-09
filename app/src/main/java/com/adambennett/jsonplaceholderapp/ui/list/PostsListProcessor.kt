@@ -5,7 +5,6 @@ import com.adambennett.api.service.models.User
 import com.adambennett.jsonplaceholderapp.ui.list.models.PostsAction
 import com.adambennett.jsonplaceholderapp.ui.list.models.PostsResult
 import com.adambennett.jsonplaceholderapp.ui.mvi.MviActionProcessor
-import com.adambennett.jsonplaceholderapp.utils.IncrementingMap
 import io.reactivex.Observable
 import io.reactivex.ObservableTransformer
 import io.reactivex.rxkotlin.Singles
@@ -35,9 +34,10 @@ class PostsListProcessor(placeholderService: PlaceholderService) :
                     .toObservable()
                     .map { (comments, posts, users) ->
                         val userMap: Map<Int, User> = users.associateBy { it.id }
-                        val commentCountMap = IncrementingMap().apply {
-                            comments.forEach { put(it.postId) }
-                        }
+                        val commentCountMap = comments
+                            .groupingBy { it.postId }
+                            .eachCount()
+                            .toMap()
 
                         return@map PostsResult.Success(
                             posts.map {
