@@ -3,7 +3,8 @@ apply from: "$rootDir/quality/ktlint.gradle.kts"
 
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
+        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
     }
     dependencies {
         classpath Libraries.kotlinGradlePlugin
