@@ -47,6 +47,8 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
+        model.processIntents(intents)
     }
 
     override fun onResume() {
@@ -55,8 +57,6 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
         compositeDisposable +=
             model.states
                 .subscribeBy(onNext = this::render)
-
-        model.processIntents(intents)
     }
 
     override fun onPause() {
