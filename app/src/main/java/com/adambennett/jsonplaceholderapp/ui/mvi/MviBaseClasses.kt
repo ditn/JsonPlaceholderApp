@@ -58,7 +58,7 @@ open class BaseMviViewModel<I : MviIntent<A>, A : MviAction, R : MviResult, S : 
         .replay(1)
         // Create the stream immediately without waiting for subscribers. Stream stays
         // alive even when the UI disconnects.
-        .autoConnect()
+        .autoConnect(0)
 
     final override fun processIntents(intents: Observable<I>) = intents.subscribe(intentSink)
 
