@@ -32,7 +32,7 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
         swipeLayout.refreshes()
             .map { UserIntent.Refresh }
             .cast(UserIntent::class.java)
-            // Emit refresh on first subscribe to trigger initial loading
+            // Emit initial intent on first subscribe to trigger initial loading
             .startWith(UserIntent.InitialIntent)
             .observeOn(AndroidSchedulers.mainThread(), false)
     }
@@ -47,8 +47,6 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-
-        model.processIntents(intents)
     }
 
     override fun onResume() {
@@ -57,6 +55,8 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
         compositeDisposable +=
             model.states
                 .subscribeBy(onNext = this::render)
+
+        model.processIntents(intents)
     }
 
     override fun onPause() {
