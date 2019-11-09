@@ -7,11 +7,11 @@ import com.adambennett.jsonplaceholderapp.ui.list.models.PostsAction
 import com.adambennett.jsonplaceholderapp.ui.list.models.PostsResult
 import com.adambennett.testutils.rxjava.just
 import com.adambennett.testutils.rxjava.rxInit
-import com.nhaarman.mockito_kotlin.mock
+import com.nhaarman.mockitokotlin2.mock
 import io.reactivex.Single
-import org.amshove.kluent.`it returns`
-import org.amshove.kluent.`should be instance of`
-import org.amshove.kluent.`should contain`
+import org.amshove.kluent.itReturns
+import org.amshove.kluent.shouldBeInstanceOf
+import org.amshove.kluent.shouldContain
 import org.junit.Rule
 import org.junit.Test
 
@@ -27,9 +27,9 @@ class PostsListProcessorTest {
             .compose(
                 PostsListProcessor(
                     mock {
-                        on { getComments() } `it returns` Single.error(Throwable())
-                        on { getPosts() } `it returns` Single.just(emptyList())
-                        on { getUsers() } `it returns` Single.just(emptyList())
+                        on { getComments() } itReturns Single.error(Throwable())
+                        on { getPosts() } itReturns Single.just(emptyList())
+                        on { getUsers() } itReturns Single.just(emptyList())
                     }
                 )::apply
             )
@@ -37,8 +37,8 @@ class PostsListProcessorTest {
             .assertNoErrors()
             .values()
             .apply {
-                this[0] `should be instance of` PostsResult.Loading::class.java
-                this[1] `should be instance of` PostsResult.Error::class.java
+                this[0] shouldBeInstanceOf PostsResult.Loading::class.java
+                this[1] shouldBeInstanceOf PostsResult.Error::class.java
             }
     }
 
@@ -49,7 +49,7 @@ class PostsListProcessorTest {
             .compose(
                 PostsListProcessor(
                     mock {
-                        on { getComments() } `it returns` Single.just(
+                        on { getComments() } itReturns Single.just(
                             listOf(
                                 Comment(
                                     postId = 1,
@@ -67,7 +67,7 @@ class PostsListProcessorTest {
                                 )
                             )
                         )
-                        on { getPosts() } `it returns` Single.just(
+                        on { getPosts() } itReturns Single.just(
                             listOf(
                                 Post(
                                     title = "title",
@@ -77,7 +77,7 @@ class PostsListProcessorTest {
                                 )
                             )
                         )
-                        on { getUsers() } `it returns` Single.just(
+                        on { getUsers() } itReturns Single.just(
                             listOf(
                                 User(
                                     userName = "username",
@@ -92,11 +92,11 @@ class PostsListProcessorTest {
             .assertNoErrors()
             .values()
             .apply {
-                this[0] `should be instance of` PostsResult.Loading::class.java
-                this[1] `should be instance of` PostsResult.Success::class.java
+                this[0] shouldBeInstanceOf PostsResult.Loading::class.java
+                this[1] shouldBeInstanceOf PostsResult.Success::class.java
                 val result = this[1] as PostsResult.Success
 
-                result.data `should contain` ListDisplayModel(
+                result.data shouldContain ListDisplayModel(
                     title = "title",
                     username = "username",
                     commentCount = 2,

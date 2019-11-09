@@ -60,6 +60,7 @@ dependencies {
     testImplementation Libraries.kotlinJunit
     testImplementation Libraries.kluent
     testImplementation Libraries.mockitoKotlin
+    testImplementation Libraries.koinTest
 
     testImplementation project(":testutils")
 }

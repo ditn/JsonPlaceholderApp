@@ -53,9 +53,7 @@ class DetailActivity : AppCompatActivity() {
 
         fun start(activity: Activity, displayModel: ListDisplayModel) {
             Intent(activity, DetailActivity::class.java)
-                .apply {
-                    putExtra(EXTRA_DISPLAY_MODEL, displayModel)
-                }
+                .apply { putExtra(EXTRA_DISPLAY_MODEL, displayModel) }
                 .run { activity.startActivity(this) }
         }
     }

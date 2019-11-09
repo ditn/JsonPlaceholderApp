@@ -161,7 +161,6 @@ object Libraries {
     const val rxBindingSlidingPaneLayout = "com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:${Versions.rxBinding}"
     const val rxBindingSwipeRefreshLayout =  "com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:${Versions.rxBinding}"
     const val rxBindingViewPager =  "com.jakewharton.rxbinding3:rxbinding-viewpager:${Versions.rxBinding}"
-
     const val rxFingerprint = "com.mtramin:rxfingerprint:${Versions.rxFingerprint}"
 
     // Injection
