@@ -10,9 +10,12 @@ import com.adambennett.jsonplaceholderapp.ui.mvi.ViewStateEvent
 
 sealed class UserIntent : MviIntent<PostsAction> {
 
+    object InitialIntent : UserIntent()
+
     object Refresh : UserIntent()
 
     override fun mapToAction(): PostsAction = when (this) {
+        InitialIntent -> PostsAction.LoadPosts
         Refresh -> PostsAction.LoadPosts
     }
 }

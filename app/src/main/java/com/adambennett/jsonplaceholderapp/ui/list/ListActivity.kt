@@ -31,9 +31,9 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
     override val intents: Observable<UserIntent> by unsafeLazy {
         swipeLayout.refreshes()
             .map { UserIntent.Refresh }
-            // Emit refresh on first subscribe to trigger initial loading
-            .startWith(UserIntent.Refresh)
             .cast(UserIntent::class.java)
+            // Emit refresh on first subscribe to trigger initial loading
+            .startWith(UserIntent.InitialIntent)
             .observeOn(AndroidSchedulers.mainThread(), false)
     }
 

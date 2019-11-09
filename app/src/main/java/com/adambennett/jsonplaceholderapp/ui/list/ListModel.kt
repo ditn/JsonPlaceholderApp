@@ -10,6 +10,7 @@ class ListModel(
     processor: PostsListProcessor
 ) : BaseMviViewModel<UserIntent, PostsAction, PostsResult, PostsViewState>(
     processor,
+    UserIntent.InitialIntent::class.java,
     PostsViewState(),
     PostsViewState.reducer
 )
