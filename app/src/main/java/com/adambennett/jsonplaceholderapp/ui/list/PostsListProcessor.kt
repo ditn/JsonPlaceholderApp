@@ -25,35 +25,37 @@ class PostsListProcessor(placeholderService: PlaceholderService) :
 
     private val loadPostsProcessor: ObservableTransformer<PostsAction, PostsResult> =
         ObservableTransformer { actions ->
-            actions.switchMap {
-                Singles.zip(
-                    placeholderService.getComments(),
-                    placeholderService.getPosts(),
-                    placeholderService.getUsers()
-                ).subscribeOn(Schedulers.io())
-                    .toObservable()
-                    .map { (comments, posts, users) ->
-                        val userMap: Map<Int, User> = users.associateBy { it.id }
-                        val commentCountMap = comments
-                            .groupingBy { it.postId }
-                            .eachCount()
-                            .toMap()
-
-                        return@map PostsResult.Success(
-                            posts.map {
-                                ListDisplayModel(
-                                    it.title,
-                                    it.body,
-                                    commentCountMap[it.id] ?: -1,
-                                    userMap[it.userId]?.userName ?: "Unknown"
-                                )
-                            }
-                        )
-                    }
-                    .cast(PostsResult::class.java)
-                    .doOnError { Timber.e(it) }
-                    .onErrorReturn { PostsResult.Error(it.message ?: "Error loading posts") }
-                    .startWith(PostsResult.Loading)
-            }
+            // TODO: 24/11/2019
+            Observable.never()
+//            actions.switchMap {
+//                Singles.zip(
+//                    placeholderService.getComments(),
+//                    placeholderService.getPosts(),
+//                    placeholderService.getUsers()
+//                ).subscribeOn(Schedulers.io())
+//                    .toObservable()
+//                    .map { (comments, posts, users) ->
+//                        val userMap: Map<Int, User> = users.associateBy { it.id }
+//                        val commentCountMap = comments
+//                            .groupingBy { it.postId }
+//                            .eachCount()
+//                            .toMap()
+//
+//                        return@map PostsResult.Success(
+//                            posts.map {
+//                                ListDisplayModel(
+//                                    it.title,
+//                                    it.body,
+//                                    commentCountMap[it.id] ?: -1,
+//                                    userMap[it.userId]?.userName ?: "Unknown"
+//                                )
+//                            }
+//                        )
+//                    }
+//                    .cast(PostsResult::class.java)
+//                    .doOnError { Timber.e(it) }
+//                    .onErrorReturn { PostsResult.Error(it.message ?: "Error loading posts") }
+//                    .startWith(PostsResult.Loading)
+//            }
         }
 }

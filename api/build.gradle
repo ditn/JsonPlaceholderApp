@@ -26,6 +26,7 @@ dependencies {
 
     implementation Libraries.moshiKotlin
     implementation Libraries.kotlin
+    implementation Libraries.kotlinCoroutines
     implementation Libraries.rxKotlin
     // Retrofit
     implementation Libraries.retrofit
@@ -45,6 +46,7 @@ dependencies {
     testImplementation Libraries.koinTest
 
     testImplementation project(":testutils")
+    testImplementation Libraries.kotlinCoroutinesTest
     testImplementation Libraries.okHttp
     testImplementation Libraries.retrofitRxJavaAdapter
     testImplementation Libraries.retrofitRxMoshiConverter

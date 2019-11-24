@@ -22,6 +22,7 @@ test {
 
 dependencies {
     implementation Libraries.kotlin
+    implementation Libraries.kotlinCoroutinesTest
     implementation Libraries.okHttp
     // Retrofit + converters/adapters
     implementation Libraries.retrofit

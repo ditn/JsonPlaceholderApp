@@ -6,10 +6,8 @@ import okhttp3.ConnectionSpec
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
-import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val API_TIMEOUT = 30L
@@ -21,8 +19,6 @@ val networkModule = module {
 
     single { Moshi.Builder().build() }
 
-    single<CallAdapter.Factory> { RxJava2CallAdapterFactory.create() }
-
     single<Converter.Factory> { MoshiConverterFactory.create(get()) }
 
     single {
@@ -31,7 +27,7 @@ val networkModule = module {
             .connectTimeout(API_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(API_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(API_TIMEOUT, TimeUnit.SECONDS)
-            .addInterceptor(get())
+            .addInterceptor(get<Interceptor>())
             .build()
     }
 
@@ -40,7 +36,6 @@ val networkModule = module {
             .baseUrl(API_ROOT)
             .client(get())
             .addConverterFactory(get())
-            .addCallAdapterFactory(get())
             .build()
     }
 }

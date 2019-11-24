@@ -22,10 +22,10 @@ test {
 
 dependencies {
     implementation Libraries.kotlin
+    implementation Libraries.kotlinCoroutines
     implementation Libraries.okHttp
     // Retrofit + converters/adapters
     implementation Libraries.retrofit
-    implementation Libraries.retrofitRxJavaAdapter
     implementation Libraries.retrofitRxMoshiConverter
     implementation Libraries.moshiKotlin
     // Service Location

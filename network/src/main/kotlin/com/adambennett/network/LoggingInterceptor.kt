@@ -1,13 +1,13 @@
 package com.adambennett.network
 
 import com.adambennett.network.interfaces.Logger
-import java.io.IOException
-import java.util.Locale
 import okhttp3.Interceptor
 import okhttp3.RequestBody
 import okhttp3.Response
-import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.Buffer
+import java.io.IOException
+import java.util.Locale
 
 class LoggingInterceptor(private val logger: Logger) : Interceptor {
 
@@ -18,15 +18,15 @@ class LoggingInterceptor(private val logger: Logger) : Interceptor {
 
         var requestLog = String.format(
             "Sending request of type %s to %s with headers %s",
-            request.method(),
-            request.url(),
-            request.headers()
+            request.method,
+            request.url,
+            request.headers
         )
 
-        if (request.method().equals("post", ignoreCase = true) ||
-            request.method().equals("put", ignoreCase = true)
+        if (request.method.equals("post", ignoreCase = true) ||
+            request.method.equals("put", ignoreCase = true)
         ) {
-            requestLog = "\n$requestLog\n${requestBodyToString(request.body())}"
+            requestLog = "\n$requestLog\n${requestBodyToString(request.body)}"
         }
 
         logger.v("Request:\n$requestLog")
@@ -37,20 +37,20 @@ class LoggingInterceptor(private val logger: Logger) : Interceptor {
         val responseLog = String.format(
             Locale.ENGLISH,
             "Received response from %s in %.1fms%n%s",
-            response.request().url(),
+            response.request.url,
             (endTime - startTime) / 1e6,
-            response.headers()
+            response.headers
         )
 
-        val bodyString = response.body()!!.string()
-        if (response.code() == 200 || response.code() == 201 || response.code() == 101) {
-            logger.v("Response: ${response.code()}\n$responseLog\n$bodyString")
+        val bodyString = response.body!!.string()
+        if (response.code == 200 || response.code == 201 || response.code == 101) {
+            logger.v("Response: ${response.code}\n$responseLog\n$bodyString")
         } else {
-            logger.e("Response: ${response.code()}\n$responseLog\n$bodyString")
+            logger.e("Response: ${response.code}\n$responseLog\n$bodyString")
         }
 
         return response.newBuilder()
-            .body(ResponseBody.create(response.body()!!.contentType(), bodyString))
+            .body(bodyString.toResponseBody(response.body!!.contentType()))
             .build()
     }
 

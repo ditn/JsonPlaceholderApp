@@ -9,8 +9,9 @@ object Versions {
     const val releaseName = "0.0.1"
 
     // Build tools and languages
-    const val androidPlugin = "4.0.0-alpha02"
+    const val androidPlugin = "4.0.0-alpha04"
     const val kotlin = "1.3.60-eap-25"
+    const val kotlinCoroutines = "1.3.2"
     const val googleServicesPlugin = "4.2.0"
     const val coveralls = "2.8.2"
     const val buildProperties = "0.4"
@@ -47,11 +48,11 @@ object Versions {
     const val ktxViewModel = "2.2.0-alpha05"
 
     // Networking, RxJava
-    const val retrofit = "2.4.0"
-    const val okHttp = "3.10.0"
+    const val retrofit = "2.6.1"
+    const val okHttp = "4.2.2"
     const val okIo = "1.14.1"
-    const val moshi = "1.8.0"
-    const val rxJava = "2.2.12"
+    const val moshi = "1.9.2"
+    const val rxJava = "2.2.15"
     const val rxKotlin = "2.4.0"
     const val rxAndroid = "2.1.1"
     const val rxBinding = "3.0.0"
@@ -76,7 +77,7 @@ object Versions {
 
     // Testing
     const val mockito = "2.27.0"
-    const val mockitoKotlin = "2.1.0"
+    const val mockitoKotlin = "2.2.0"
     const val kluent = "1.53"
     const val junit = "4.12"
     const val robolectric = "3.8"
@@ -93,6 +94,9 @@ object Libraries {
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidPlugin}"
     const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinCoroutines}"
+    const val kotlinCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.kotlinCoroutines}"
+    const val kotlinCoroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinCoroutines}"
     const val kotlinAllOpen = "org.jetbrains.kotlin:kotlin-allopen:${Versions.kotlin}"
     const val coveralls = "org.kt3k.gradle.plugin:coveralls-gradle-plugin:${Versions.coveralls}"
     const val googleServicesPlugin = "com.google.gms:google-services:${Versions.googleServicesPlugin}"

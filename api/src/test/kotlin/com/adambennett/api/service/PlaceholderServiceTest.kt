@@ -7,8 +7,11 @@ import com.adambennett.api.koin.apiModule
 import com.adambennett.api.service.testutils.mockNetworkModule
 import com.adambennett.api.service.testutils.mockWebServerInit
 import com.adambennett.testutils.getStringFromResource
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldEqualTo
 import org.junit.After
@@ -20,6 +23,7 @@ import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
 import org.koin.test.inject
 
+@ExperimentalCoroutinesApi
 class PlaceholderServiceTest : KoinTest {
 
     private val subject: PlaceholderService by inject()
@@ -53,22 +57,15 @@ class PlaceholderServiceTest : KoinTest {
                 .setBody(getStringFromResource("api/Comments.json"))
         )
 
-        subject.getComments()
-            .test()
-            .assertComplete()
-            .assertNoErrors()
-            .values()
-            .first()
-            .apply {
-                this[0].id shouldEqualTo 1
-                this[1].name shouldBeEqualTo "quo vero reiciendis velit similique earum"
-                this[2].email shouldBeEqualTo "Nikita@garfield.biz"
-                this[3].body shouldBeEqualTo "non et atque\noccaecati deserunt quas " +
-                    "accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur " +
-                    "itaque dolor\net qui rerum deleniti ut occaecati"
-            }
-
-        server.takeRequest().path shouldBeEqualTo "/$PATH_COMMENTS"
+        runBlockingTest {
+            val list = subject.getComments()
+            list[0].id shouldEqualTo 1
+            list[1].name shouldBeEqualTo "quo vero reiciendis velit similique earum"
+            list[2].email shouldBeEqualTo "Nikita@garfield.biz"
+            list[3].body shouldBeEqualTo "non et atque\noccaecati deserunt quas " +
+                "accusantium unde odit nobis qui voluptatem\nquia voluptas consequuntur " +
+                "itaque dolor\net qui rerum deleniti ut occaecati"
+        }.also { server.takeRequest().path shouldBe "/$PATH_COMMENTS" }
     }
 
     @Test
@@ -79,19 +76,11 @@ class PlaceholderServiceTest : KoinTest {
                 .setBody(getStringFromResource("api/Users.json"))
         )
 
-        subject.getUsers()
-            .test()
-            .assertComplete()
-            .assertNoErrors()
-            .values()
-            .first()
-            .apply {
-                val (userName, id) = this[0]
-                userName shouldBeEqualTo "Bret"
-                id shouldEqualTo 1
-            }
-
-        server.takeRequest().path shouldBeEqualTo "/$PATH_USERS"
+        runBlockingTest {
+            val (userName, id) = subject.getUsers().first()
+            userName shouldBeEqualTo "Bret"
+            id shouldEqualTo 1
+        }.also { server.takeRequest().path shouldBe "/$PATH_USERS" }
     }
 
     @Test
@@ -102,23 +91,17 @@ class PlaceholderServiceTest : KoinTest {
                 .setBody(getStringFromResource("api/Posts.json"))
         )
 
-        subject.getPosts()
-            .test()
-            .assertComplete()
-            .assertNoErrors()
-            .values()
-            .first()
-            .apply {
-                this[0].userId shouldEqualTo 1
-                this[1].id shouldEqualTo 2
-                this[2].title shouldBeEqualTo "ea molestias quasi exercitationem" +
-                    " repellat qui ipsa sit aut"
-                this[3].body shouldBeEqualTo "ullam et saepe reiciendis voluptatem " +
-                    "adipisci\nsit amet autem assumenda provident rerum culpa\nquis " +
-                    "hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt " +
-                    "voluptatem rerum illo velit"
-            }
+        runBlockingTest {
+            val posts = subject.getPosts()
 
-        server.takeRequest().path shouldBeEqualTo "/$PATH_POSTS"
+            posts[0].userId shouldEqualTo 1
+            posts[1].id shouldEqualTo 2
+            posts[2].title shouldBeEqualTo "ea molestias quasi exercitationem" +
+                " repellat qui ipsa sit aut"
+            posts[3].body shouldBeEqualTo "ullam et saepe reiciendis voluptatem " +
+                "adipisci\nsit amet autem assumenda provident rerum culpa\nquis " +
+                "hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt " +
+                "voluptatem rerum illo velit"
+        }.also { server.takeRequest().path shouldBe "/$PATH_POSTS" }
     }
 }

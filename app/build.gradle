@@ -43,6 +43,8 @@ dependencies {
     implementation project(":network")
 
     implementation Libraries.kotlin
+    implementation Libraries.kotlinCoroutines
+    implementation Libraries.kotlinCoroutinesAndroid
     implementation Libraries.appCompat
     implementation Libraries.constraintLayout
     implementation Libraries.rxBindingAppCompat
