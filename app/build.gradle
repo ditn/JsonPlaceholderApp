@@ -54,6 +54,10 @@ dependencies {
     implementation Libraries.composeLayout
     implementation Libraries.composeMaterial
     implementation Libraries.composeTooling
+    implementation Libraries.composeAndroidText
+    implementation Libraries.composeFramework
+    implementation Libraries.composePlatform
+    implementation Libraries.composeFoundation
     // Logging
     implementation Libraries.timber
 

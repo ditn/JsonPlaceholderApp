@@ -16,8 +16,6 @@ import androidx.ui.layout.Padding
 import androidx.ui.material.Divider
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.surface.Surface
-import androidx.ui.material.themeColor
-import androidx.ui.material.themeTextStyle
 import androidx.ui.res.stringResource
 import androidx.ui.tooling.preview.Preview
 import com.adambennett.jsonplaceholderapp.R
@@ -63,7 +61,7 @@ class DetailActivity : AppCompatActivity() {
 fun Detail(displayModel: ListDisplayModel) {
     Padding(16.dp) {
         Column {
-            Text(text = displayModel.title, style = +themeTextStyle { h4 })
+            Text(text = displayModel.title, style = (+MaterialTheme.typography()).h4)
             Divider(height = 16.dp, color = Color.Transparent)
             FlexRow {
                 expanded(1.0f) {
@@ -91,7 +89,7 @@ fun Detail(displayModel: ListDisplayModel) {
 @Composable
 fun DefaultPreview() {
     MaterialTheme {
-        Surface(color = +themeColor { surface }) {
+        Surface(color = (+MaterialTheme.colors()).surface) {
             Detail(
                 ListDisplayModel(
                     title = "sunt aut facere repellat provident occaecati excepturi optio" +

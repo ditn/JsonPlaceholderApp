@@ -9,8 +9,8 @@ object Versions {
     const val releaseName = "0.0.1"
 
     // Build tools and languages
-    const val androidPlugin = "4.0.0-alpha02"
-    const val kotlin = "1.3.60-eap-25"
+    const val androidPlugin = "4.0.0-alpha05"
+    const val kotlin = "1.3.61"
     const val googleServicesPlugin = "4.2.0"
     const val coveralls = "2.8.2"
     const val buildProperties = "0.4"
@@ -38,7 +38,7 @@ object Versions {
     const val room = "2.0.0-rc01"
 
     // Compose
-    const val compose = "0.1.0-dev02"
+    const val compose = "0.1.0-dev03"
 
     // KTX
     const val ktxCore = "1.1.0-alpha05"
@@ -115,6 +115,10 @@ object Libraries {
     const val composeLayout =  "androidx.ui:ui-layout:${Versions.compose}"
     const val composeMaterial =  "androidx.ui:ui-material:${Versions.compose}"
     const val composeTooling =  "androidx.ui:ui-tooling:${Versions.compose}"
+    const val composeAndroidText =  "androidx.ui:ui-android-text:${Versions.compose}"
+    const val composeFramework =  "androidx.ui:ui-framework:${Versions.compose}"
+    const val composePlatform =  "androidx.ui:ui-platform:${Versions.compose}"
+    const val composeFoundation =  "androidx.ui:ui-foundation:${Versions.compose}"
 
     // Lifecycle
     const val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
