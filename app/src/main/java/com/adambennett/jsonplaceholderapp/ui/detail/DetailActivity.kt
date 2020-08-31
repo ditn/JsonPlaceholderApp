@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -60,69 +59,70 @@ class DetailActivity : AppCompatActivity() {
 }
 
 @Composable
-fun Detail(displayModel: ListDisplayModel, onBack: () -> Unit = {}) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Detail",
-                        color = contentColor()
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(Icons.Filled.ArrowBack)
+private fun Detail(displayModel: ListDisplayModel, onBack: () -> Unit = {}) {
+    MaterialTheme {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "Detail",
+                            color = contentColor()
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onBack) {
+                            Icon(Icons.Filled.ArrowBack)
+                        }
                     }
-                }
-            )
-        },
-        bodyContent = {
-            ScrollableColumn(modifier = Modifier.padding(16.dp)) {
-                Text(text = displayModel.title, style = MaterialTheme.typography.h3)
-
-                Row(modifier = Modifier.padding(top = 16.dp)) {
-                    Text(
-                        modifier = Modifier.weight(1.0f),
-                        text = stringResource(
-                            R.string.detail_comments,
-                            displayModel.commentCount
-                        )
-                    )
-                    Text(
-                        modifier = Modifier.weight(1.0f),
-                        text = stringResource(
-                            R.string.detail_username,
-                            displayModel.username
-                        )
-                    )
-                }
-                Text(
-                    modifier = Modifier.padding(top = 16.dp),
-                    text = displayModel.body
                 )
-            }
+            },
+            bodyContent = { DetailBody(displayModel) }
+        )
+    }
+}
+
+@Composable
+private fun DetailBody(displayModel: ListDisplayModel) {
+    ScrollableColumn(modifier = Modifier.padding(16.dp)) {
+        Text(text = displayModel.title, style = MaterialTheme.typography.h3)
+
+        Row(modifier = Modifier.padding(top = 16.dp)) {
+            Text(
+                modifier = Modifier.weight(1.0f),
+                text = stringResource(
+                    R.string.detail_comments,
+                    displayModel.commentCount
+                )
+            )
+            Text(
+                modifier = Modifier.weight(1.0f),
+                text = stringResource(
+                    R.string.detail_username,
+                    displayModel.username
+                )
+            )
         }
-    )
+        Text(
+            modifier = Modifier.padding(top = 16.dp),
+            text = displayModel.body
+        )
+    }
 }
 
 @Preview
 @Composable
-fun DefaultPreview() {
-    MaterialTheme {
-        Surface(color = MaterialTheme.colors.surface) {
-            Detail(
-                ListDisplayModel(
-                    title = "sunt aut facere repellat provident occaecati excepturi optio" +
-                        " reprehenderit",
-                    body = "quia et suscipit\n" +
-                        "suscipit recusandae consequuntur expedita et cum\n" +
-                        "reprehenderit molestiae ut ut quas totam\n" +
-                        "nostrum rerum est autem sunt rem eveniet architecto",
-                    commentCount = 4,
-                    username = "Bret"
-                )
-            )
-        }
-    }
+private fun DefaultPreview() {
+    Detail(
+        ListDisplayModel(
+            title = "sunt aut facere repellat provident occaecati excepturi optio" +
+                " reprehenderit",
+            body = "quia et suscipit\n" +
+                "suscipit recusandae consequuntur expedita et cum\n" +
+                "reprehenderit molestiae ut ut quas totam\n" +
+                "nostrum rerum est autem sunt rem eveniet architecto",
+            commentCount = 4,
+            username = "Bret"
+        )
+    )
 }

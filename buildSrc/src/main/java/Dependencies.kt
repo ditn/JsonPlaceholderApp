@@ -117,6 +117,7 @@ object Libraries {
     const val composeUi =  "androidx.compose.ui:ui:${Versions.compose}"
     const val composeMaterial =  "androidx.compose.material:material:${Versions.compose}"
     const val composeRuntime =  "androidx.compose.runtime:runtime:${Versions.compose}"
+    const val composeRuntimeRxJava2 =  "androidx.compose.runtime:runtime-rxjava2:${Versions.compose}"
     const val composeTooling =  "androidx.ui:ui-tooling:${Versions.compose}"
 
     // Lifecycle

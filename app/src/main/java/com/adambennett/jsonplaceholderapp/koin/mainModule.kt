@@ -6,7 +6,7 @@ import timber.log.Timber
 
 val mainModule = module {
 
-    factory {
+    factory<Logger> {
         object : Logger {
             override fun d(s: String) {
                 Timber.d(s)
