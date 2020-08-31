@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.adambennett.jsonplaceholderapp.R
 import com.adambennett.jsonplaceholderapp.ui.detail.DetailActivity
-import com.adambennett.jsonplaceholderapp.ui.list.adapter.PostsListAdapter
 import com.adambennett.jsonplaceholderapp.ui.list.models.PostsAction
 import com.adambennett.jsonplaceholderapp.ui.list.models.PostsViewState
 import com.adambennett.jsonplaceholderapp.ui.list.models.UserIntent
@@ -18,8 +17,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.activity_main.recycler_view as recyclerView
-import kotlinx.android.synthetic.main.activity_main.swipe_refresh_layout as swipeLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, PostsViewState> {
@@ -29,24 +26,25 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
      * UserIntent objects.
      */
     override val intents: Observable<UserIntent> by unsafeLazy {
-        swipeLayout.refreshes()
-            .map { UserIntent.Refresh }
-            .cast(UserIntent::class.java)
-            // Emit initial intent on first subscribe to trigger initial loading
-            .startWith(UserIntent.InitialIntent)
-            .observeOn(AndroidSchedulers.mainThread(), false)
+//        swipeLayout.refreshes()
+//            .map { UserIntent.Refresh }
+//            .cast(UserIntent::class.java)
+//             Emit initial intent on first subscribe to trigger initial loading
+//            .startWith(UserIntent.InitialIntent)
+//            .observeOn(AndroidSchedulers.mainThread(), false)
+        TODO()
     }
 
     private val compositeDisposable = CompositeDisposable()
     private val model: ListModel by viewModel()
-    private val adapter by unsafeLazy { PostsListAdapter { onPostSelected(it) } }
+//    private val adapter by unsafeLazy { PostsListAdapter { onPostSelected(it) } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//        recyclerView.adapter = adapter
     }
 
     override fun onResume() {
@@ -66,8 +64,8 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
 
     override fun render(state: PostsViewState) {
         with(state) {
-            swipeLayout.isRefreshing = refreshing
-            adapter.items = data
+//            swipeLayout.isRefreshing = refreshing
+//            adapter.items = data
             error?.consume { toast(it ?: "Error fetching posts") }
         }
     }

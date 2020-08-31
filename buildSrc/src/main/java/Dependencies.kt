@@ -9,12 +9,12 @@ object Versions {
     const val releaseName = "0.0.1"
 
     // Build tools and languages
-    const val androidPlugin = "4.0.0-alpha02"
-    const val kotlin = "1.3.60-eap-25"
+    const val androidPlugin = "4.2.0-alpha08"
+    const val kotlin = "1.4.0"
     const val googleServicesPlugin = "4.2.0"
     const val coveralls = "2.8.2"
     const val buildProperties = "0.4"
-    const val ktlint = "0.35.0"
+    const val ktlint = "0.38.1"
     const val kotlinJvmTarget = "1.8"
     const val javaCompatibilityVersion = 1.8
 
@@ -38,7 +38,7 @@ object Versions {
     const val room = "2.0.0-rc01"
 
     // Compose
-    const val compose = "0.1.0-dev02"
+    const val compose = "1.0.0-alpha01"
 
     // KTX
     const val ktxCore = "1.1.0-alpha05"
@@ -47,10 +47,10 @@ object Versions {
     const val ktxViewModel = "2.2.0-alpha05"
 
     // Networking, RxJava
-    const val retrofit = "2.4.0"
-    const val okHttp = "3.10.0"
+    const val retrofit = "2.9.0"
+    const val okHttp = "4.8.1"
     const val okIo = "1.14.1"
-    const val moshi = "1.8.0"
+    const val moshi = "1.10.0"
     const val rxJava = "2.2.12"
     const val rxKotlin = "2.4.0"
     const val rxAndroid = "2.1.1"
@@ -112,8 +112,11 @@ object Libraries {
     const val dynamicAnims = "androidx.dynamicanimation:dynamicanimation:${Versions.dynamicAnims}"
 
     // Compose
-    const val composeLayout =  "androidx.ui:ui-layout:${Versions.compose}"
-    const val composeMaterial =  "androidx.ui:ui-material:${Versions.compose}"
+    const val composeFoundation =  "androidx.compose.foundation:foundation:${Versions.compose}"
+    const val composeFoundationLayout =  "androidx.compose.foundation:foundation-layout:${Versions.compose}"
+    const val composeUi =  "androidx.compose.ui:ui:${Versions.compose}"
+    const val composeMaterial =  "androidx.compose.material:material:${Versions.compose}"
+    const val composeRuntime =  "androidx.compose.runtime:runtime:${Versions.compose}"
     const val composeTooling =  "androidx.ui:ui-tooling:${Versions.compose}"
 
     // Lifecycle

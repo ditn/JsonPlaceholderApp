@@ -4,43 +4,43 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.Composable
-import androidx.compose.unaryPlus
-import androidx.ui.core.Text
-import androidx.ui.core.dp
-import androidx.ui.core.setContent
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.FlexRow
-import androidx.ui.layout.Padding
-import androidx.ui.material.Divider
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.surface.Surface
-import androidx.ui.material.themeColor
-import androidx.ui.material.themeTextStyle
-import androidx.ui.res.stringResource
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.ScrollableColumn
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.contentColor
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.adambennett.jsonplaceholderapp.R
 import com.adambennett.jsonplaceholderapp.ui.list.ListDisplayModel
 import com.adambennett.jsonplaceholderapp.utils.consume
-import com.adambennett.jsonplaceholderapp.utils.unsafeLazy
+import com.adambennett.jsonplaceholderapp.utils.extraNotNull
 
 class DetailActivity : AppCompatActivity() {
 
-    private val displayModel by unsafeLazy {
-        intent?.getParcelableExtra(EXTRA_DISPLAY_MODEL) as? ListDisplayModel
-            ?: throw IllegalArgumentException("Display model must be passed to Activity via Intent")
-    }
+    private val displayModel: ListDisplayModel by extraNotNull(EXTRA_DISPLAY_MODEL)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme { Detail(displayModel) }
-        }
 
-        supportActionBar?.apply {
-            setHomeButtonEnabled(true)
-            setDisplayHomeAsUpEnabled(true)
+        setContent {
+            MaterialTheme {
+                Detail(displayModel) {
+                    finish()
+                }
+            }
         }
     }
 
@@ -60,38 +60,57 @@ class DetailActivity : AppCompatActivity() {
 }
 
 @Composable
-fun Detail(displayModel: ListDisplayModel) {
-    Padding(16.dp) {
-        Column {
-            Text(text = displayModel.title, style = +themeTextStyle { h4 })
-            Divider(height = 16.dp, color = Color.Transparent)
-            FlexRow {
-                expanded(1.0f) {
+fun Detail(displayModel: ListDisplayModel, onBack: () -> Unit = {}) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
                     Text(
-                        text = +stringResource(
+                        text = "Detail",
+                        color = contentColor()
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.Filled.ArrowBack)
+                    }
+                }
+            )
+        },
+        bodyContent = {
+            ScrollableColumn(modifier = Modifier.padding(16.dp)) {
+                Text(text = displayModel.title, style = MaterialTheme.typography.h3)
+
+                Row(modifier = Modifier.padding(top = 16.dp)) {
+                    Text(
+                        modifier = Modifier.weight(1.0f),
+                        text = stringResource(
                             R.string.detail_comments,
                             displayModel.commentCount
                         )
                     )
                     Text(
-                        text = +stringResource(
+                        modifier = Modifier.weight(1.0f),
+                        text = stringResource(
                             R.string.detail_username,
                             displayModel.username
                         )
                     )
                 }
+                Text(
+                    modifier = Modifier.padding(top = 16.dp),
+                    text = displayModel.body
+                )
             }
-            Divider(height = 16.dp, color = Color.Transparent)
-            Text(text = displayModel.body)
         }
-    }
+    )
 }
 
 @Preview
 @Composable
 fun DefaultPreview() {
     MaterialTheme {
-        Surface(color = +themeColor { surface }) {
+        Surface(color = MaterialTheme.colors.surface) {
             Detail(
                 ListDisplayModel(
                     title = "sunt aut facere repellat provident occaecati excepturi optio" +

@@ -5,7 +5,6 @@ apply from: "$rootDir/quality/ktlint.gradle.kts"
 buildscript {
     repositories {
         jcenter()
-        maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
     }
     dependencies {
         classpath Libraries.kotlinGradlePlugin
@@ -25,7 +24,6 @@ dependencies {
     implementation project(":network")
 
     implementation Libraries.moshiKotlin
-    implementation Libraries.kotlin
     implementation Libraries.rxKotlin
     // Retrofit
     implementation Libraries.retrofit

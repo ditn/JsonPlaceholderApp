@@ -31,18 +31,23 @@ android {
 
     kotlinOptions {
         jvmTarget = Versions.kotlinJvmTarget
+        useIR = true
     }
-}
 
-androidExtensions {
-    experimental = true
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion Versions.kotlin
+        kotlinCompilerExtensionVersion Versions.compose
+    }
 }
 
 dependencies {
     implementation project(":api")
     implementation project(":network")
 
-    implementation Libraries.kotlin
     implementation Libraries.appCompat
     implementation Libraries.constraintLayout
     implementation Libraries.rxBindingAppCompat
@@ -51,9 +56,12 @@ dependencies {
     implementation Libraries.rxKotlin
     implementation Libraries.koin
     // Compose
-    implementation Libraries.composeLayout
+    implementation Libraries.composeFoundation
+    implementation Libraries.composeFoundationLayout
     implementation Libraries.composeMaterial
+    implementation Libraries.composeRuntime
     implementation Libraries.composeTooling
+    implementation Libraries.composeUi
     // Logging
     implementation Libraries.timber
 

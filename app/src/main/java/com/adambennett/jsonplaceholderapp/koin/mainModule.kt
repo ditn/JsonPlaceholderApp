@@ -19,6 +19,6 @@ val mainModule = module {
             override fun e(s: String) {
                 Timber.e(s)
             }
-        } as Logger
+        }
     }
 }

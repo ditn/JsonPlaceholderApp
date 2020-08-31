@@ -17,7 +17,7 @@ private const val API_ROOT = "https://jsonplaceholder.typicode.com"
 
 val networkModule = module {
 
-    single { LoggingInterceptor(get()) as Interceptor }
+    single<Interceptor> { LoggingInterceptor(get()) }
 
     single { Moshi.Builder().build() }
 
@@ -31,7 +31,7 @@ val networkModule = module {
             .connectTimeout(API_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(API_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(API_TIMEOUT, TimeUnit.SECONDS)
-            .addInterceptor(get())
+            .addInterceptor(get<Interceptor>())
             .build()
     }
 
