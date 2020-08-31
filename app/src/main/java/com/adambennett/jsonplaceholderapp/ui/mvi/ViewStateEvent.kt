@@ -19,7 +19,7 @@ data class ViewStateEvent<T>(val payload: T? = null) {
      * consumed.
      */
     fun handle(action: (T?) -> Unit) {
-        if (isConsumed.get()) {
+        if (!isConsumed.get()) {
             action(payload)
         }
     }
@@ -29,7 +29,7 @@ data class ViewStateEvent<T>(val payload: T? = null) {
      * consumed on access.
      */
     fun consume(action: (T?) -> Unit) {
-        if (isConsumed.getAndSet(true)) {
+        if (!isConsumed.getAndSet(true)) {
             action(payload)
         }
     }
