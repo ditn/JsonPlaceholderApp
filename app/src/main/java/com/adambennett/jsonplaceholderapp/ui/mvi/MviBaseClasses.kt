@@ -19,8 +19,6 @@ interface MviViewModel<I : MviIntent<A>, A : MviAction, S : MviViewState> {
 interface MviView<I : MviIntent<A>, A : MviAction, S : MviViewState> {
 
     val intents: Observable<I>
-
-    fun render(state: S)
 }
 
 open class BaseMviViewModel<I : MviIntent<A>, A : MviAction, R : MviResult, S : MviViewState>(

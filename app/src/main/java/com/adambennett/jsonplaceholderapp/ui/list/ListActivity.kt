@@ -6,16 +6,21 @@ import androidx.compose.foundation.Text
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.contentColor
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumnFor
-import androidx.compose.material.ListItem
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rxjava2.subscribeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.adambennett.jsonplaceholderapp.R
 import com.adambennett.jsonplaceholderapp.ui.detail.DetailActivity
@@ -62,7 +67,7 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
         model.processIntents(intents)
     }
 
-    override fun render(state: PostsViewState) {
+    private fun render(state: PostsViewState) {
         with(state) {
 //            swipeLayout.isRefreshing = refreshing
             error?.consume { toast(it ?: "Error fetching posts") }
@@ -90,19 +95,37 @@ private fun ListScreen(
                 )
             },
             bodyContent = {
-                ListBodyContent(list = state.data, click = click)
+                if (state.refreshing) {
+                    // TODO Loading
+                } else {
+                    ListBodyContent(list = state.data, click = click)
+                }
             }
         )
     }
 }
 
 @Composable
-private fun ListBodyContent(list: List<ListDisplayModel>, click: (ListDisplayModel) -> Unit = { }) {
+private fun ListBodyContent(
+    list: List<ListDisplayModel>,
+    click: (ListDisplayModel) -> Unit = { }
+) {
     LazyColumnFor(items = list, modifier = Modifier.fillMaxSize()) { item ->
-        ListItem(
-            modifier = Modifier.clickable(onClick = { click(item) }),
-            text = { item.title }
-        )
+        Card(
+            modifier = Modifier
+                .fillParentMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp)
+                .clickable(onClick = { click(item) })
+        ) {
+            Text(
+                modifier = Modifier.padding(16.dp),
+                text = item.title,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.h6,
+                textAlign = TextAlign.Start
+            )
+        }
     }
 }
 
