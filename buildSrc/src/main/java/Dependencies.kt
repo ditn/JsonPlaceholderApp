@@ -9,7 +9,7 @@ object Versions {
     const val releaseName = "0.0.1"
 
     // Build tools and languages
-    const val androidPlugin = "4.2.0-alpha08"
+    const val androidPlugin = "4.2.0-alpha09"
     const val kotlin = "1.4.0"
     const val googleServicesPlugin = "4.2.0"
     const val coveralls = "2.8.2"
@@ -38,7 +38,7 @@ object Versions {
     const val room = "2.0.0-rc01"
 
     // Compose
-    const val compose = "1.0.0-alpha01"
+    const val compose = "1.0.0-alpha02"
 
     // KTX
     const val ktxCore = "1.1.0-alpha05"

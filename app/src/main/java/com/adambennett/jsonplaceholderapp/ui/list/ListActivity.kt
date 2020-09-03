@@ -78,10 +78,18 @@ class ListActivity : AppCompatActivity(), MviView<UserIntent, PostsAction, Posts
 @Composable
 private fun ListScreen(
     viewState: Observable<PostsViewState>,
-    click: (ListDisplayModel) -> Unit = { }
+    click: (ListDisplayModel) -> Unit
 ) {
     val state: PostsViewState by viewState.subscribeAsState(initial = PostsViewState())
 
+    ListScaffold(state, click)
+}
+
+@Composable
+private fun ListScaffold(
+    state: PostsViewState,
+    click: (ListDisplayModel) -> Unit = { }
+) {
     MaterialTheme {
         Scaffold(
             topBar = {
@@ -129,25 +137,28 @@ private fun ListBodyContent(
     }
 }
 
+@ExperimentalStdlibApi
 @Preview
 @Composable
 private fun DefaultPreview() {
-    ListScreen(
-        viewState = Observable.just(
-            PostsViewState(
-                data = listOf(
-                    ListDisplayModel(
-                        title = "sunt aut facere repellat provident occaecati excepturi optio" +
-                            " reprehenderit",
-                        body = "quia et suscipit\n" +
-                            "suscipit recusandae consequuntur expedita et cum\n" +
-                            "reprehenderit molestiae ut ut quas totam\n" +
-                            "nostrum rerum est autem sunt rem eveniet architecto",
-                        commentCount = 4,
-                        username = "Bret"
+    ListScaffold(
+        state = PostsViewState(
+            data = buildList {
+                repeat(10) {
+                    add(
+                        ListDisplayModel(
+                            title = "sunt aut facere repellat provident occaecati excepturi optio" +
+                                " reprehenderit",
+                            body = "quia et suscipit\n" +
+                                "suscipit recusandae consequuntur expedita et cum\n" +
+                                "reprehenderit molestiae ut ut quas totam\n" +
+                                "nostrum rerum est autem sunt rem eveniet architecto",
+                            commentCount = 4,
+                            username = "Bret"
+                        )
                     )
-                )
-            )
+                }
+            }
         )
     )
 }
